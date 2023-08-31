@@ -15,11 +15,21 @@ public class ObjectControllerNoMaterial : MonoBehaviour
     private Vector3 _startingPosition;
     private bool _isSwitching = false;
     private GameObject _originalObject;
+    private GameObject _activeObject;
 
+    //lala
     public void Start()
     {
         _startingPosition = transform.parent.localPosition;
         _originalObject = gameObject;
+
+        if (InactiveObject == null || GazedAtObject == null)
+        {
+            Debug.LogError("InactiveObject or GazedAtObject is not assigned!");
+            return;
+        }
+
+        _activeObject = GazedAtObject;
         SetObject(false);
     }
 
