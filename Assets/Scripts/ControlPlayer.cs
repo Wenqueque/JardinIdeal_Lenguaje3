@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -31,4 +32,5 @@ public class ControlPlayer : MonoBehaviour
         // Mueve al jugador en la dirección calculada
         player.Move(moveDirection.normalized * walkSpeed * Time.deltaTime);
     }
+       
 }

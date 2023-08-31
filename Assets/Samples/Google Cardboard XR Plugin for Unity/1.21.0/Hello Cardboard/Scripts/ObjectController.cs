@@ -18,12 +18,14 @@
 
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 /// <summary>
 /// Controls target objects behaviour.
 /// </summary>
 public class ObjectController : MonoBehaviour
 {
+
     /// <summary>
     /// The material to use when this object is inactive (not being gazed at).
     /// </summary>
