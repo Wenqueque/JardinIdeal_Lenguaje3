@@ -170,7 +170,7 @@ public class CardboardReticlePointer : MonoBehaviour
         }
 
         // Checks for screen touches.
-        if (Google.XR.Cardboard.Api.IsTriggerPressed)
+        if (Input.GetButtonDown("Interactuar"))
         {
             _gazedAtObject?.SendMessage("OnPointerClick");
         }
