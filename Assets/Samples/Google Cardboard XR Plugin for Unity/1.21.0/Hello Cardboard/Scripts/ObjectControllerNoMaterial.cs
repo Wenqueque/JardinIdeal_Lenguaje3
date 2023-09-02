@@ -7,68 +7,45 @@ public class ObjectControllerNoMaterial : MonoBehaviour
     public GameObject InactiveObject;
     public GameObject GazedAtObject;
 
-    private const float _minObjectDistance = 2.5f;
-    private const float _maxObjectDistance = 3.5f;
-    private const float _minObjectHeight = 0.5f;
-    private const float _maxObjectHeight = 3.5f;
+    private bool _isGazedAt = false;
 
-    private Vector3 _startingPosition;
-    private bool _isSwitching = false;
-    private GameObject _originalObject;
-    private GameObject _activeObject;
-
-    //lala
-    public void Start()
+    private void OnPointerEnter()
     {
-        _startingPosition = transform.parent.localPosition;
-        _originalObject = gameObject;
-
-        if (InactiveObject == null || GazedAtObject == null)
-        {
-            Debug.LogError("InactiveObject or GazedAtObject is not assigned!");
-            return;
-        }
-
-        _activeObject = GazedAtObject;
-        SetObject(false);
-    }
-
-    public void TeleportRandomly()
-    {
-        int sibIdx = transform.GetSiblingIndex();
-        int numSibs = transform.parent.childCount;
-        sibIdx = (sibIdx + Random.Range(1, numSibs)) % numSibs;
-        GameObject randomSib = transform.parent.GetChild(sibIdx).gameObject;
-
-        float angle = Random.Range(-Mathf.PI, Mathf.PI);
-        float distance = Random.Range(_minObjectDistance, _maxObjectDistance);
-        float height = Random.Range(_minObjectHeight, _maxObjectHeight);
-        Vector3 newPos = new Vector3(Mathf.Cos(angle) * distance, height,
-                                     Mathf.Sin(angle) * distance);
-
-        transform.parent.localPosition = newPos;
-
-        randomSib.SetActive(true);
-        gameObject.SetActive(false);
-        SetObject(false);
-    }
-
-    public void OnPointerEnter()
-    {
+        _isGazedAt = true;
         SetObject(true);
     }
 
-    public void OnPointerExit()
+    private void OnPointerExit()
     {
+        _isGazedAt = false;
         SetObject(false);
     }
 
-    public void OnPointerClick()
+    private void Update()
     {
-        if (!_isSwitching)
+        if (_isGazedAt && Input.GetMouseButtonDown(1)) // Cambiamos a Input.GetMouseButtonDown(1) para clic derecho
         {
-            _isSwitching = true;
-            StartCoroutine(SwitchObjectsAndBack());
+            // Comprobar si se está mirando el objeto con un Raycast
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.gameObject == gameObject)
+                {
+                    // Solo cambia el objeto si se hizo clic derecho en el objeto
+                    StartCoroutine(SwitchObjectsAndBack());
+                }
+            }
+        }
+    }
+
+    private void SetObject(bool gazedAt)
+    {
+        if (InactiveObject != null && GazedAtObject != null)
+        {
+            InactiveObject.SetActive(!gazedAt);
+            GazedAtObject.SetActive(gazedAt);
         }
     }
 
@@ -80,15 +57,5 @@ public class ObjectControllerNoMaterial : MonoBehaviour
 
         // Switch back to the original object
         SetObject(false);
-        _isSwitching = false;
-    }
-
-    private void SetObject(bool gazedAt)
-    {
-        if (InactiveObject != null && GazedAtObject != null)
-        {
-            InactiveObject.SetActive(!gazedAt);
-            GazedAtObject.SetActive(gazedAt);
-        }
     }
 }
