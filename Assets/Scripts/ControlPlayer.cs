@@ -14,6 +14,11 @@ public class ControlPlayer : MonoBehaviour
 
     private Vector3 velocity; // Velocidad vertical
 
+    //SONIDO
+    public AudioSource pasos;
+    private bool Hactivo;
+    private bool Vactivo;
+
     private void Awake()
     {
         player = GetComponent<CharacterController>();
@@ -51,6 +56,45 @@ public class ControlPlayer : MonoBehaviour
 
         // Aplica la velocidad vertical calculada
         player.Move(velocity * Time.deltaTime);
+
+
+        //SONIDO-----------------------------------------------------
+
+        if (Input.GetButtonDown("Horizontal"))
+        {
+            if (Vactivo == false)
+            {
+                Hactivo = true;
+                pasos.Play();
+            }
+        }
+
+        if (Input.GetButtonDown("Vertical"))
+        {
+            if (Hactivo == false)
+            {
+                Vactivo = true;
+                pasos.Play();
+            }
+        }
+
+        if (Input.GetButtonUp("Horizontal"))
+        {
+            Hactivo = false;
+            if (Vactivo == false)
+            {
+                pasos.Pause();
+            }
+        }
+
+        if (Input.GetButtonUp("Vertical"))
+        {
+            Vactivo = false;
+            if (Hactivo == false)
+            {
+                pasos.Pause();
+            }
+        }
     }
 
 }

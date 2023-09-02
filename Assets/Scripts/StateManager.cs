@@ -12,6 +12,8 @@ public class StateManager : MonoBehaviour
 
     private bool _isGazedAt = false;
 
+    private int vecesRegadas = 0; //Para regar
+
     private void Start()
     {
         // Desactiva todos los estados excepto el primero (estado inicial)
@@ -23,12 +25,21 @@ public class StateManager : MonoBehaviour
 
     private void Update()
     {
-        // Si estamos en el estado 1 y el eje "Regar" está activado
+        if (_isGazedAt && currentState == 0 && Input.GetMouseButtonDown(0) && !isChangingState && vecesRegadas < 3)
+        {
+            Debug.Log("Eje 'Regar' activado");
+            ChangeToState(1);
+            vecesRegadas++; // Incrementa el contador de riegos
+        }
+
+       /* Este es el código para accionar sin las limitaciones
+       // Si estamos en el estado 1 y el eje "Regar" está activado
         if (_isGazedAt && currentState == 0 && Input.GetMouseButtonDown(0) && !isChangingState)
         {
             Debug.Log("Eje 'Regar' activado");
             ChangeToState(1);
         }
+       */
 
         // Si estamos en el estado 2, actualiza el temporizador
         if (currentState == 1)
@@ -63,7 +74,14 @@ public class StateManager : MonoBehaviour
         }
 
         isChangingState = false;
+
+        // Si el jugador ha regado tres veces, desactiva la función de riego
+        if (vecesRegadas >= 3)
+        {
+            _isGazedAt = false;
+        }
     }
+
 
     // Este método se llama cuando el objeto está siendo mirado.
     public void OnPointerEnter()
