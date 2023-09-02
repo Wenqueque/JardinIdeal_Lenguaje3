@@ -10,6 +10,8 @@ public class StateManager : MonoBehaviour
     private float timer = 0f; // Temporizador para el cambio de estado
     private float state2Duration = 5f; // Duración del estado 2 en segundos
 
+    private bool _isGazedAt = false;
+
     private void Start()
     {
         // Desactiva todos los estados excepto el primero (estado inicial)
@@ -22,9 +24,9 @@ public class StateManager : MonoBehaviour
     private void Update()
     {
         // Si estamos en el estado 1 y hacemos clic
-        if (currentState == 0 && Input.GetMouseButtonDown(0) && !isChangingState)
+        if (_isGazedAt && currentState == 0 && Input.GetMouseButtonDown(1) && !isChangingState)
         {
-            // Cambia al estado 2
+            Debug.Log("Clic izquierdo detectado");
             ChangeToState(1);
         }
 
@@ -61,5 +63,19 @@ public class StateManager : MonoBehaviour
         }
 
         isChangingState = false;
+    }
+
+    // Este método se llama cuando el objeto está siendo mirado.
+    public void OnPointerEnter()
+    {
+        _isGazedAt = true;
+        Debug.Log("OnPointerEnter");
+    }
+
+    // Este método se llama cuando el objeto ya no está siendo mirado.
+    public void OnPointerExit()
+    {
+        _isGazedAt = false;
+        Debug.Log("OnPointerExit");
     }
 }

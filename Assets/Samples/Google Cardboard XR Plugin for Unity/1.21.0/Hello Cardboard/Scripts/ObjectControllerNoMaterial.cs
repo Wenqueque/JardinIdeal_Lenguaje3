@@ -1,30 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections; // Agrega esta línea
 
 public class ObjectControllerNoMaterial : MonoBehaviour
 {
-    public GameObject InactiveObject;
-    public GameObject GazedAtObject;
+    public GameObject object1; // Arrastra el primer objeto aquí desde el Inspector.
+    public GameObject object2; // Arrastra el segundo objeto aquí desde el Inspector.
 
     private bool _isGazedAt = false;
-
-    private void OnPointerEnter()
-    {
-        _isGazedAt = true;
-        SetObject(true);
-    }
-
-    private void OnPointerExit()
-    {
-        _isGazedAt = false;
-        SetObject(false);
-    }
 
     private void Update()
     {
         if (_isGazedAt && Input.GetMouseButtonDown(1)) // Cambiamos a Input.GetMouseButtonDown(1) para clic derecho
         {
+            Debug.Log("Clic derecho detectado");
+
             // Comprobar si se está mirando el objeto con un Raycast
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -40,22 +29,27 @@ public class ObjectControllerNoMaterial : MonoBehaviour
         }
     }
 
-    private void SetObject(bool gazedAt)
-    {
-        if (InactiveObject != null && GazedAtObject != null)
-        {
-            InactiveObject.SetActive(!gazedAt);
-            GazedAtObject.SetActive(gazedAt);
-        }
-    }
-
+    // Agrega este método para gestionar el cambio entre los objetos.
     private IEnumerator SwitchObjectsAndBack()
     {
-        // Switch to the other object
-        SetObject(true);
-        yield return new WaitForSeconds(5.0f);
+        object1.SetActive(false);
+        object2.SetActive(true);
 
-        // Switch back to the original object
-        SetObject(false);
+        yield return new WaitForSeconds(1.0f); // Espera un segundo antes de cambiar de nuevo.
+
+        object1.SetActive(true);
+        object2.SetActive(false);
+    }
+
+    // Este método se llama cuando el objeto está siendo mirado.
+    public void OnPointerEnter()
+    {
+        _isGazedAt = true;
+    }
+
+    // Este método se llama cuando el objeto ya no está siendo mirado.
+    public void OnPointerExit()
+    {
+        _isGazedAt = false;
     }
 }
