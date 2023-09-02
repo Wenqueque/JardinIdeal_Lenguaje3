@@ -23,10 +23,10 @@ public class StateManager : MonoBehaviour
 
     private void Update()
     {
-        // Si estamos en el estado 1 y hacemos clic
-        if (_isGazedAt && currentState == 0 && Input.GetMouseButtonDown(1) && !isChangingState)
+        // Si estamos en el estado 1 y el eje "Regar" está activado
+        if (_isGazedAt && currentState == 0 && Input.GetAxis("Regar") > 0 && !isChangingState)
         {
-            Debug.Log("Clic izquierdo detectado");
+            Debug.Log("Eje 'Regar' activado");
             ChangeToState(1);
         }
 
@@ -69,13 +69,11 @@ public class StateManager : MonoBehaviour
     public void OnPointerEnter()
     {
         _isGazedAt = true;
-        Debug.Log("OnPointerEnter");
     }
 
     // Este método se llama cuando el objeto ya no está siendo mirado.
     public void OnPointerExit()
     {
         _isGazedAt = false;
-        Debug.Log("OnPointerExit");
     }
 }
