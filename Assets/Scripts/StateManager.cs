@@ -24,7 +24,7 @@ public class StateManager : MonoBehaviour
     private void Update()
     {
         // Si estamos en el estado 1 y el eje "Regar" está activado
-        if (_isGazedAt && currentState == 0 && Input.GetAxis("Regar") > 0 && !isChangingState)
+        if (_isGazedAt && currentState == 0 && Input.GetMouseButtonDown(0) && !isChangingState)
         {
             Debug.Log("Eje 'Regar' activado");
             ChangeToState(1);
