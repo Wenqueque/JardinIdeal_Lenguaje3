@@ -19,116 +19,71 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-/// <summary>
 /// Draws a circular reticle in front of any object that the user points at.
-/// </summary>
-/// <remarks>
 /// Sends messages to gazed GameObject. The reticle dilates if the object has an interactive layer.
-/// </remarks>
+
 public class CardboardReticlePointer : MonoBehaviour
 {
-    /// <summary>
     /// Sorting order to use for the reticle's renderer.
-    /// </summary>
-    /// <remarks><para>
-    /// Range values come from https://docs.unity3d.com/ScriptReference/Renderer-sortingOrder.html.
-    /// </para><para>
     /// Default value 32767 ensures gaze reticle is always rendered on top.
-    /// </para></remarks>
     [Range(-32767, 32767)]
     public int ReticleSortingOrder = 32767;
 
-    /// <summary>
     /// Mask used to indicate interactive objects.
-    /// </summary>
     public LayerMask ReticleInteractionLayerMask = 1 << _RETICLE_INTERACTION_DEFAULT_LAYER;
 
-    /// <summary>
     /// Default layer for interactive game objects.
-    /// </summary>
     private const int _RETICLE_INTERACTION_DEFAULT_LAYER = 8;
 
-    /// <summary>
     /// The angle in degrees defined between the 2 vectors that depart from the camera and point to
     /// the extremes of the minimum inner diameter of the reticle.
-    ///
     /// Being `z` the distance from the camera to the object and `d_i` the inner diameter of the
     /// reticle, this is 2*arctg(d_i/(2*z)).
-    /// </summary>
     private const float _RETICLE_MIN_INNER_ANGLE = 0.0f;
 
-    /// <summary>
     /// The angle in degrees defined between the 2 vectors that depart from the camera and point to
     /// the extremes of the minimum outer diameter of the reticle.
-    ///
     /// Being `z` the distance from the camera to the object and `d_o` the outer diameter of the
     /// reticle, this is 2*arctg(d_o/(2*z)).
-    /// </summary>
     private const float _RETICLE_MIN_OUTER_ANGLE = 0.5f;
 
-    /// <summary>
     /// Angle at which to expand the reticle when intersecting with an object (in degrees).
-    /// </summary>
     private const float _RETICLE_GROWTH_ANGLE = 1.5f;
 
-    /// <summary>
     /// Minimum distance between the camera and the reticle (in meters).
-    /// </summary>
     private const float _RETICLE_MIN_DISTANCE = 0.45f;
 
-    /// <summary>
     /// Maximum distance between the camera and the reticle (in meters).
-    /// </summary>
     private const float _RETICLE_MAX_DISTANCE = 20.0f;
 
-    /// <summary>
     /// Number of segments making the reticle circle.
-    /// </summary>
     private const int _RETICLE_SEGMENTS = 20;
 
-    /// <summary>
     /// Growth speed multiplier for the reticle.
-    /// </summary>
     private const float _RETICLE_GROWTH_SPEED = 8.0f;
 
-    /// <summary>
     /// The game object the reticle is pointing at.
-    /// </summary>
     private GameObject _gazedAtObject = null;
 
-    /// <summary>
     /// The material used to render the reticle.
-    /// </summary>
     private Material _reticleMaterial;
 
-    /// <summary>
     /// The current inner angle of the reticle (in degrees).
-    /// </summary>
     private float _reticleInnerAngle;
 
-    /// <summary>
     /// The current outer angle of the reticle (in degrees).
-    /// </summary>
     private float _reticleOuterAngle;
 
-    /// <summary>
     /// The current distance of the reticle (in meters).
-    /// </summary>
     private float _reticleDistanceInMeters;
 
-    /// <summary>
     /// The current inner diameter of the reticle, before distance multiplication (in meters).
-    /// </summary>
     private float _reticleInnerDiameter;
 
-    /// <summary>
     /// The current outer diameter of the reticle, before distance multiplication (in meters).
-    /// </summary>
     private float _reticleOuterDiameter;
 
-    /// <summary>
     /// Start is called before the first frame update.
-    /// </summary>
     private void Start()
     {
         Renderer rendererComponent = GetComponent<Renderer>();
@@ -139,13 +94,10 @@ public class CardboardReticlePointer : MonoBehaviour
         CreateMesh();
     }
 
-    /// <summary>
     /// Update is called once per frame.
-    /// </summary>
     private void Update()
     {
-        // Casts ray towards camera's forward direction, to detect if a GameObject is being gazed
-        // at.
+        // Casts ray towards camera's forward direction, to detect if a GameObject is being gazed at.
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, _RETICLE_MAX_DISTANCE))
         {
@@ -153,9 +105,9 @@ public class CardboardReticlePointer : MonoBehaviour
             if (_gazedAtObject != hit.transform.gameObject)
             {
                 // New GameObject.
-                _gazedAtObject?.SendMessage("OnPointerExit");
+                _gazedAtObject?.SendMessage("OnPointerExit", null, SendMessageOptions.DontRequireReceiver);
                 _gazedAtObject = hit.transform.gameObject;
-                _gazedAtObject.SendMessage("OnPointerEnter");
+                _gazedAtObject.SendMessage("OnPointerEnter", null, SendMessageOptions.DontRequireReceiver);
             }
 
             bool isInteractive = (1 << _gazedAtObject.layer & ReticleInteractionLayerMask) != 0;
@@ -164,23 +116,21 @@ public class CardboardReticlePointer : MonoBehaviour
         else
         {
             // No GameObject detected in front of the camera.
-            _gazedAtObject?.SendMessage("OnPointerExit");
+            _gazedAtObject?.SendMessage("OnPointerExit", null, SendMessageOptions.DontRequireReceiver);
             _gazedAtObject = null;
             ResetParams();
         }
 
         // Checks for screen touches.
-        if (Google.XR.Cardboard.Api.IsTriggerPressed)
+        if (Input.GetButtonDown("Interactuar"))
         {
-            _gazedAtObject?.SendMessage("OnPointerClick");
+            _gazedAtObject?.SendMessage("OnPointerClick", null, SendMessageOptions.DontRequireReceiver);
         }
 
         UpdateDiameters();
     }
 
-    /// <summary>
     /// Updates the material based on the reticle properties.
-    /// </summary>
     private void UpdateDiameters()
     {
         _reticleDistanceInMeters =
@@ -214,9 +164,7 @@ public class CardboardReticlePointer : MonoBehaviour
         _reticleMaterial.SetFloat("_DistanceInMeters", _reticleDistanceInMeters);
     }
 
-    /// <summary>
     /// Sets the reticle pointer's inner angle, outer angle and distance.
-    /// </summary>
     /// <param name="distance">The distance to the target location.</param>
     /// <param name="interactive">Whether the pointer is pointing at an interactive object.</param>
     private void SetParams(float distance, bool interactive)
@@ -236,9 +184,7 @@ public class CardboardReticlePointer : MonoBehaviour
         }
     }
 
-    /// <summary>
     /// Exits the reticle pointer's target.
-    /// </summary>
     private void ResetParams()
     {
         _reticleDistanceInMeters = _RETICLE_MAX_DISTANCE;
@@ -246,9 +192,7 @@ public class CardboardReticlePointer : MonoBehaviour
         _reticleOuterAngle = _RETICLE_MIN_OUTER_ANGLE;
     }
 
-    /// <summary>
     /// Creates the mesh used to draw the reticle.
-    /// </summary>
     private void CreateMesh()
     {
         Mesh mesh = new Mesh();
@@ -298,5 +242,5 @@ public class CardboardReticlePointer : MonoBehaviour
         mesh.vertices = vertices;
         mesh.triangles = indices;
         mesh.RecalculateBounds();
-    }
+    }
 }
