@@ -122,7 +122,7 @@ public class CardboardReticlePointer : MonoBehaviour
         }
 
         // Checks for screen touches.
-        if (Input.GetButtonDown("Interactuar"))
+        if (Input.GetButtonDown("Cortar"))
         {
             _gazedAtObject?.SendMessage("OnPointerClick", null, SendMessageOptions.DontRequireReceiver);
         }

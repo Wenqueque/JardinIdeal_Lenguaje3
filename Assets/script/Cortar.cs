@@ -1,18 +1,16 @@
 using UnityEngine;
 using System.Collections;
 
-public class regar : MonoBehaviour
+public class Cortar : MonoBehaviour
 {
     public GameObject[] states; // Array para almacenar los estados
     private int currentState = 0; // El estado actual
-    private bool isChangingState = false; // Indicador para evitar cambios mÃºltiples simultÃ¡neos
+    private bool isChangingState = false; // Indicador para evitar cambios múltiples simultáneos
 
     private float timer = 0f; // Temporizador para el cambio de estado
-    private float state2Duration = 10f; // DuraciÃ³n del estado en segundos
+    private float state2Duration = 10f; // Duración del estado en segundos
 
     private bool _isGazedAt = false;
-
-    private int vecesRegadas = 0; //Para regar
 
     private void Start()
     {
@@ -25,23 +23,13 @@ public class regar : MonoBehaviour
 
     private void Update()
     {
-        //if (_isGazedAt && currentState == 0 && !isChangingState && vecesRegadas < 3 && Input.GetAxis("Regar") > 0) //JOYSTICK
-        if (_isGazedAt && currentState == 0 && !isChangingState && vecesRegadas < 3 && Input.GetMouseButtonDown(1)) //TECLADO
+        // Si estamos en el estado 1 y el eje "Regar" está activado
+        //if (_isGazedAt && currentState == 0 && !isChangingState && Input.GetAxis("Cortar") > 0) //JOYSTICK
+        if (_isGazedAt && currentState == 0 && !isChangingState && Input.GetMouseButtonDown(1)) //TECLADO
         {
-            Debug.Log("Eje 'Regar' activado");
-            ChangeToState(1);
-            vecesRegadas++; // Incrementa el contador de riegos
-        }
-
-       /* Este es el cÃ³digo para accionar sin las limitaciones
-       // Si estamos en el estado 1 y el eje "Regar" estÃ¡ activado
-        if (_isGazedAt && currentState == 0 && Input.GetMouseButtonDown(0) && !isChangingState)
-        {
-            Debug.Log("Eje 'Regar' activado");
-            ChangeToState(1);
-        }
-       */
-
+             ChangeToState(1);
+         }
+       
         // Si estamos en el estado 2, actualiza el temporizador
         if (currentState == 1)
         {
@@ -75,24 +63,19 @@ public class regar : MonoBehaviour
         }
 
         isChangingState = false;
-
-        // Si el jugador ha regado tres veces, desactiva la funciÃ³n de riego
-        if (vecesRegadas >= 3)
-        {
-            _isGazedAt = false;
-        }
+               
     }
 
 
-    // Este mÃ©todo se llama cuando el objeto estÃ¡ siendo mirado.
+    // Este método se llama cuando el objeto está siendo mirado.
     public void OnPointerEnter()
     {
         _isGazedAt = true;
     }
 
-    // Este mÃ©todo se llama cuando el objeto ya no estÃ¡ siendo mirado.
+    // Este método se llama cuando el objeto ya no está siendo mirado.
     public void OnPointerExit()
     {
-        _isGazedAt =Â false;
-Â Â Â Â }
+        _isGazedAt = false;
+    }
 }
