@@ -256,6 +256,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d5b71415ecebf3b42b84f32ff8e6c2fe,
+        type: 3}
+      propertyPath: m_TagString
+      value: marchito
+      objectReference: {fileID: 0}
     - target: {fileID: 1235325404441655284, guid: d5b71415ecebf3b42b84f32ff8e6c2fe,
         type: 3}
       propertyPath: m_Layer
@@ -689,7 +694,7 @@ Transform:
   m_GameObject: {fileID: 547269743}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.11, y: 2.0488257, z: -1.106041}
+  m_LocalPosition: {x: -1.11, y: 2.0488257, z: -16.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -869,7 +874,7 @@ Transform:
   m_GameObject: {fileID: 711421950}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.31, y: 2.0488257, z: -6.416041}
+  m_LocalPosition: {x: 2.31, y: 2.0488257, z: -21.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1034,6 +1039,7 @@ GameObject:
   - component: {fileID: 791776577}
   - component: {fileID: 791776576}
   - component: {fileID: 791776575}
+  - component: {fileID: 791776578}
   m_Layer: 6
   m_Name: margaritas
   m_TagString: Untagged
@@ -1054,8 +1060,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 734794061}
   - {fileID: 1833810229}
+  - {fileID: 734794061}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &791776574
@@ -1136,6 +1142,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.100831, y: 0.6903994, z: 1.0918365}
   m_Center: {x: -2.8466692, y: -0.5759692, z: 1.5287063}
+--- !u!114 &791776578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791776572}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49d1bb644b515c5419f5f4cb30730758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  states:
+  - {fileID: 0}
+  - {fileID: 734794060}
 --- !u!1001 &827623389
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1402,6 +1423,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c9bee7e1d1ed14243aa223e02b621fea,
+        type: 3}
+      propertyPath: m_TagString
+      value: bien
+      objectReference: {fileID: 0}
     - target: {fileID: 1805940778159003073, guid: c9bee7e1d1ed14243aa223e02b621fea,
         type: 3}
       propertyPath: m_Layer
@@ -1592,7 +1618,7 @@ Transform:
   m_GameObject: {fileID: 1280561414}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.65, y: 2.14, z: -6.35}
+  m_LocalPosition: {x: -4.65, y: 2.14, z: -21.84396}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1929,15 +1955,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1641223938}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.9999761, z: -0, w: -0.0069177337}
-  m_LocalPosition: {x: 0.11, y: 1.59, z: 7.84}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 330585546}
   - {fileID: 1379995763}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180.793, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1641223940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1952,6 +1978,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 5
   gravity: 9.81
+  limiteXMin: -50
+  limiteXMax: 50
+  limiteZMin: -50
+  limiteZMax: 50
 --- !u!54 &1641223941
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1972,8 +2002,8 @@ Rigidbody:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
+  m_ImplicitCom: 0
+  m_ImplicitTensor: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
