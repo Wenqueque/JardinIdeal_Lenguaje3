@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(Rigidbody))]
-public class ControlPlayer : MonoBehaviour
+public class ControlPlayer1 : MonoBehaviour
 {
     public float walkSpeed = 5f;
     public float gravity = 9.81f; // Gravedad
@@ -13,15 +13,12 @@ public class ControlPlayer : MonoBehaviour
     private Rigidbody rb;
 
     private Vector3 velocity; // Velocidad vertical
+    public string etiquetaObjetoNoAbonado = "noAbonado";
     public string etiquetaObjetoMarchito = "Marchito";
-    public float limiteXMin = -5f; // Límite mínimo en el eje X
-    public float limiteXMax = 5f;  // Límite máximo en el eje X
-    public float limiteZMin = -5f; // Límite mínimo en el eje Z
-    public float limiteZMax = 5f;  // Límite máximo en el eje Z
-    //SONIDO
-    public AudioSource pasos;
-    private bool Hactivo;
-    private bool Vactivo;
+    public float limiteXMin = -30f; // Límite mínimo en el eje X
+    public float limiteXMax = 30f;  // Límite máximo en el eje X
+    public float limiteZMin = -30f; // Límite mínimo en el eje Z
+    public float limiteZMax = 30f;  // Límite máximo en el eje Z
     private void Awake()
     {
         player = GetComponent<CharacterController>();
@@ -35,6 +32,7 @@ public class ControlPlayer : MonoBehaviour
     {
         // Buscar objetos con la etiqueta "marchito" en la escena
         GameObject[] objetosMarchitos = GameObject.FindGameObjectsWithTag ("Marchito");
+        GameObject[] objetosNoAbonados = GameObject.FindGameObjectsWithTag ("noAbonado");
         // Obtén las entradas de movimiento del jugador
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
@@ -65,8 +63,9 @@ public class ControlPlayer : MonoBehaviour
         // Obtener la posición actual del jugador
         Vector3 posicionJugador = transform.position;
 // Si hay objetos "marchito" en la escena, aplicar límites de movimiento
-        if (objetosMarchitos.Length > 0)
+        if (objetosMarchitos.Length > 0 )
         {
+        
         // Limitar el movimiento en el eje X
         posicionJugador.x = Mathf.Clamp(posicionJugador.x, limiteXMin, limiteXMax);
 
@@ -75,45 +74,18 @@ public class ControlPlayer : MonoBehaviour
 
         // Asignar la nueva posición al jugador
         transform.position = posicionJugador;
-        }
-
-      //SONIDO-----------------------------------------------------
-
-        if (Input.GetButtonDown("Horizontal"))
+        
+        } else if (objetosNoAbonados.Length > 0)
         {
-            if (Vactivo == false)
-            {
-                Hactivo = true;
-                pasos.Play();
-            }
-        }
+            // Limitar el movimiento en el eje X
+        posicionJugador.x = Mathf.Clamp(posicionJugador.x, limiteXMin, limiteXMax);
 
-        if (Input.GetButtonDown("Vertical"))
-        {
-            if (Hactivo == false)
-            {
-                Vactivo = true;
-                pasos.Play();
-            }
-        }
+        // Limitar el movimiento en el eje Z
+        posicionJugador.z = Mathf.Clamp(posicionJugador.z, limiteZMin, limiteZMax);
 
-        if (Input.GetButtonUp("Horizontal"))
-        {
-            Hactivo = false;
-            if (Vactivo == false)
-            {
-                pasos.Pause();
-            }
+        // Asignar la nueva posición al jugador
+        transform.position = posicionJugador;
         }
-
-        if (Input.GetButtonUp("Vertical"))
-        {
-            Vactivo = false;
-            if (Hactivo == false)
-            {
-                pasos.Pause();
-            }
-        }  
     }
 
 }

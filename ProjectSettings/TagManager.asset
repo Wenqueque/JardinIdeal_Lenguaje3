@@ -7,6 +7,7 @@ TagManager:
   - bien
   - maleza
   - Marchito
+  - noAbonado
   layers:
   - Default
   - TransparentFX
