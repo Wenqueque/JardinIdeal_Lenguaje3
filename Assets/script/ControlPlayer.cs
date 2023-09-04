@@ -13,11 +13,11 @@ public class ControlPlayer : MonoBehaviour
     private Rigidbody rb;
 
     private Vector3 velocity; // Velocidad vertical
-
-    public float limiteXMin = -50f; // Límite mínimo en el eje X
-    public float limiteXMax = 50f;  // Límite máximo en el eje X
-    public float limiteZMin = -50f; // Límite mínimo en el eje Z
-    public float limiteZMax = 50f;  // Límite máximo en el eje Z
+    public string etiquetaObjetoMarchito = "Marchito";
+    public float limiteXMin = -5f; // Límite mínimo en el eje X
+    public float limiteXMax = 5f;  // Límite máximo en el eje X
+    public float limiteZMin = -5f; // Límite mínimo en el eje Z
+    public float limiteZMax = 5f;  // Límite máximo en el eje Z
     private void Awake()
     {
         player = GetComponent<CharacterController>();
@@ -29,6 +29,9 @@ public class ControlPlayer : MonoBehaviour
 
     private void Update()
     {
+        // Buscar objetos con la etiqueta "marchito" en la escena
+        GameObject[] objetosMarchitos = GameObject.FindGameObjectsWithTag ("Marchito");
+
         // Obtén las entradas de movimiento del jugador
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
@@ -58,7 +61,9 @@ public class ControlPlayer : MonoBehaviour
 
         // Obtener la posición actual del jugador
         Vector3 posicionJugador = transform.position;
-
+// Si hay objetos "marchito" en la escena, aplicar límites de movimiento
+        if (objetosMarchitos.Length > 0)
+        {
         // Limitar el movimiento en el eje X
         posicionJugador.x = Mathf.Clamp(posicionJugador.x, limiteXMin, limiteXMax);
 
@@ -67,6 +72,7 @@ public class ControlPlayer : MonoBehaviour
 
         // Asignar la nueva posición al jugador
         transform.position = posicionJugador;
+        }
     }
 
 }
