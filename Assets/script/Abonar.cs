@@ -15,9 +15,9 @@ public class Abonar : MonoBehaviour
 
     private void Update()
     {
-        // Si estamos mirando el objeto con _isGazed y se presiona el botón derecho del mouse
-        //if (_isGazedAt && Input.GetAxis("Abonar") > 0) //JOYSTICK
-        if (_isGazedAt && Input.GetMouseButtonDown(1)) //TECLADO
+        // Si estamos mirando el objeto con _isGazed y se presiona el botï¿½n derecho del mouse
+        if (_isGazedAt && Input.GetAxis("Abonar") > 0) //JOYSTICK
+        //if (_isGazedAt && Input.GetMouseButtonDown(1)) //TECLADO
         {
             // Cambia al objeto 2
             object1.SetActive(false);
@@ -25,13 +25,13 @@ public class Abonar : MonoBehaviour
         }
     }
 
-    // Este método se llama cuando el objeto está siendo mirado.
+    // Este mï¿½todo se llama cuando el objeto estï¿½ siendo mirado.
     public void OnPointerEnter()
     {
         _isGazedAt = true;
     }
 
-    // Este método se llama cuando el objeto ya no está siendo mirado.
+    // Este mï¿½todo se llama cuando el objeto ya no estï¿½ siendo mirado.
     public void OnPointerExit()
     {
         _isGazedAt = false;

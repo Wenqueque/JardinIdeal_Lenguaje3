@@ -5,10 +5,10 @@ public class AgarrarFruta : MonoBehaviour
 {
     public GameObject[] states; // Array para almacenar los estados
     private int currentState = 0; // El estado actual
-    private bool isChangingState = false; // Indicador para evitar cambios múltiples simultáneos
+    private bool isChangingState = false; // Indicador para evitar cambios mï¿½ltiples simultï¿½neos
 
     private float timer = 0f; // Temporizador para el cambio de estado
-    private float state2Duration = 10f; // Duración del estado en segundos
+    private float state2Duration = 10f; // Duraciï¿½n del estado en segundos
 
     private bool _isGazedAt = false;
 
@@ -23,9 +23,9 @@ public class AgarrarFruta : MonoBehaviour
 
     private void Update()
     {
-        // Si estamos en el estado 1 y el eje "Regar" está activado
-        //if (_isGazedAt && currentState == 0 && !isChangingState && Input.GetAxis("Fruta") > 0) //JOYSTICK
-        if (_isGazedAt && currentState == 0 && !isChangingState  && Input.GetMouseButtonDown(1)) //TECLADO
+        // Si estamos en el estado 1 y el eje "Regar" estï¿½ activado
+        if (_isGazedAt && currentState == 0 && !isChangingState && Input.GetAxis("Fruta") > 0) //JOYSTICK
+        //if (_isGazedAt && currentState == 0 && !isChangingState  && Input.GetMouseButtonDown(1)) //TECLADO
         {
             ChangeToState(1);
         }
@@ -67,13 +67,13 @@ public class AgarrarFruta : MonoBehaviour
     }
 
 
-    // Este método se llama cuando el objeto está siendo mirado.
+    // Este mï¿½todo se llama cuando el objeto estï¿½ siendo mirado.
     public void OnPointerEnter()
     {
         _isGazedAt = true;
     }
 
-    // Este método se llama cuando el objeto ya no está siendo mirado.
+    // Este mï¿½todo se llama cuando el objeto ya no estï¿½ siendo mirado.
     public void OnPointerExit()
     {
         _isGazedAt = false;

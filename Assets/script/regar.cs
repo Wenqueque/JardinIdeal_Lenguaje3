@@ -26,7 +26,7 @@ public class regar : MonoBehaviour
 
     private void Update()
     {
-        if (_isGazedAt && currentState == 0 && Input.GetAxis("Abonar") > 0 && !isChangingState && vecesRegadas < 3) //JOYSTICK
+        if (_isGazedAt && currentState == 0 && Input.GetAxis("Regar") > 0 && !isChangingState && vecesRegadas < 3) //JOYSTICK
         //if (_isGazedAt && currentState == 0 && Input.GetMouseButtonDown(0) && !isChangingState && vecesRegadas < 3)
         {
             Debug.Log("Eje 'Regar' activado");
