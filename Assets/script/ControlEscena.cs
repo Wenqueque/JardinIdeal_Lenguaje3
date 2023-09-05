@@ -9,7 +9,7 @@ public class CambioDeEscena : MonoBehaviour
     {
        // Buscar objetos con la etiqueta "marchito" en la escena
         GameObject[] objetosbien = GameObject.FindGameObjectsWithTag ("bien");
-                if (objetosbien.Length > 0)
+                if (objetosbien.Length >= 4)
         {
                 {
                     // Cambia a la Escena 2

@@ -8,11 +8,12 @@ public class regar : MonoBehaviour
     private bool isChangingState = false; // Indicador para evitar cambios múltiples simultáneos
 
     private float timer = 0f; // Temporizador para el cambio de estado
-    private float state2Duration = 10f; // Duración del estado en segundos
+    private float state2Duration = 30f; // Duración del estado en segundos
 
     private bool _isGazedAt = false;
 
-    private int vecesRegadas = 0; //Para regar
+    // Variable estática para el contador de riegos compartido entre todos los objetos
+    private static int vecesRegadas = 0;
 
     private void Start()
     {
@@ -25,22 +26,12 @@ public class regar : MonoBehaviour
 
     private void Update()
     {
-        //if (_isGazedAt && currentState == 0 && !isChangingState && vecesRegadas < 3 && Input.GetAxis("Regar") > 0) //JOYSTICK
-        if (_isGazedAt && currentState == 0 && !isChangingState && vecesRegadas < 3 && Input.GetMouseButtonDown(1)) //TECLADO
+        if (_isGazedAt && currentState == 0 && Input.GetMouseButtonDown(0) && !isChangingState && vecesRegadas < 3)
         {
             Debug.Log("Eje 'Regar' activado");
             ChangeToState(1);
             vecesRegadas++; // Incrementa el contador de riegos
         }
-
-       /* Este es el código para accionar sin las limitaciones
-       // Si estamos en el estado 1 y el eje "Regar" está activado
-        if (_isGazedAt && currentState == 0 && Input.GetMouseButtonDown(0) && !isChangingState)
-        {
-            Debug.Log("Eje 'Regar' activado");
-            ChangeToState(1);
-        }
-       */
 
         // Si estamos en el estado 2, actualiza el temporizador
         if (currentState == 1)
@@ -51,6 +42,22 @@ public class regar : MonoBehaviour
             if (timer <= 0)
             {
                 ChangeToState(0);
+            }
+        }
+
+        // Si hacemos clic en un objeto con el tag "Fuente"
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.CompareTag("Fuente"))
+                {
+                    Debug.Log("Clic en objeto con tag 'Fuente'");
+                    vecesRegadas = 0; // Reinicia el contador de riegos
+                }
             }
         }
     }
@@ -76,13 +83,12 @@ public class regar : MonoBehaviour
 
         isChangingState = false;
 
-        // Si el jugador ha regado tres veces, desactiva la función de riego
+        // Si el jugador ha regado tres veces en total, desactiva la función de riego
         if (vecesRegadas >= 3)
         {
             _isGazedAt = false;
         }
     }
-
 
     // Este método se llama cuando el objeto está siendo mirado.
     public void OnPointerEnter()
@@ -93,6 +99,6 @@ public class regar : MonoBehaviour
     // Este método se llama cuando el objeto ya no está siendo mirado.
     public void OnPointerExit()
     {
-        _isGazedAt = false;
-    }
+        _isGazedAt = false;
+    }
 }
