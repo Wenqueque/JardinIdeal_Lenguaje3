@@ -27,7 +27,7 @@ public class regar : MonoBehaviour
     private void Update()
     {
         if (_isGazedAt && currentState == 0 && Input.GetAxis("Regar") > 0 && !isChangingState && vecesRegadas < 3) //JOYSTICK
-        //if (_isGazedAt && currentState == 0 && Input.GetMouseButtonDown(0) && !isChangingState && vecesRegadas < 3)
+        //if (_isGazedAt && currentState == 0 && Input.GetMouseButtonDown(1) && !isChangingState && vecesRegadas < 3) //TECLADO CLICK DERECHO
         {
             Debug.Log("Eje 'Regar' activado");
             ChangeToState(1);
@@ -47,7 +47,8 @@ public class regar : MonoBehaviour
         }
 
         // Si hacemos clic en un objeto con el tag "Fuente"
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetAxis("Regar") > 0) //JOYSTICK
+        //if (Input.GetMouseButtonDown(1)) //TECLADO CLICK DERECHO
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
