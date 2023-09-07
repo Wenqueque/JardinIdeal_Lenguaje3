@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class cambioEstados : MonoBehaviour
+public class CambioEstados : MonoBehaviour
 {
     public GameObject prefabAbonar;
     public GameObject prefabBien;
@@ -12,6 +12,12 @@ public class cambioEstados : MonoBehaviour
     private EstadoPlanta estadoActual; // Estado actual de la planta
 
     private GameObject plantaActual; // Referencia al prefab activo actualmente
+
+    //Mira al objetivo
+    private bool _isGazedAt = false;
+
+    // Variable estática para el contador de riegos compartido entre todos los objetos
+    private static int vecesRegadas = 0;
 
     public enum EstadoPlanta
     {
@@ -42,19 +48,49 @@ public class cambioEstados : MonoBehaviour
             }
         }
 
-        // Detecta la interacción del jugador y cambia el estado
-        if (Input.GetKeyDown(KeyCode.B) && estadoActual == EstadoPlanta.Abonar)
+        // Detecta la interacción del jugador y cambia el estado solo si el puntero está mirando el objeto
+        if (_isGazedAt)
         {
-            // Realiza acciones para el estado de Abonar
-            Debug.Log("Abonando la planta");
-            CambiarEstado(EstadoPlanta.Bien);
+            if (Input.GetKeyDown(KeyCode.B) && estadoActual == EstadoPlanta.Abonar)
+            {
+                // Realiza acciones para el estado de Abonar
+                Debug.Log("Abonando la planta");
+                CambiarEstado(EstadoPlanta.Bien);
+            }
+            else if (Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.NecesitaRegar)
+            {
+                // Realiza acciones para el estado de NecesitaRegar
+                Debug.Log("Regando la planta");
+                CambiarEstado(EstadoPlanta.Bien);
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.NecesitaRegar)
+
+        if (Input.GetMouseButtonDown(1)) //TECLADO CLICK DERECHO
         {
-            // Realiza acciones para el estado de NecesitaRegar
-            Debug.Log("Regando la planta");
-            CambiarEstado(EstadoPlanta.Bien);
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.CompareTag("Fuente"))
+                {
+                    Debug.Log("Clic en objeto con tag 'Fuente'");
+                    vecesRegadas = 0; // Reinicia el contador de riegos
+                }
+            }
         }
+    }
+
+    // Este método se llama cuando el objeto está siendo mirado.
+    public void OnPointerEnter()
+    {
+        _isGazedAt = true;
+    }
+
+    // Este método se llama cuando el objeto ya no está siendo mirado.
+    public void OnPointerExit()
+    {
+        _isGazedAt = false;
     }
 
     private void CambiarEstado(EstadoPlanta nuevoEstado)

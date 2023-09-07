@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.42
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.38821253, g: 0.4667289, b: 0.4753804, a: 0.42}
+  m_IndirectSpecularColor: {r: 0.38804772, g: 0.46658236, b: 0.47520256, a: 0.42}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1349,8 +1349,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 031e4fd55e2bfcf4d8066876a2eb4831,
         type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 031e4fd55e2bfcf4d8066876a2eb4831,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8603806674150118374, guid: 031e4fd55e2bfcf4d8066876a2eb4831,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1514,7 +1524,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c9bee7e1d1ed14243aa223e02b621fea,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c9bee7e1d1ed14243aa223e02b621fea,
         type: 3}
@@ -2935,7 +2945,8 @@ GameObject:
   m_Component:
   - component: {fileID: 952226522}
   - component: {fileID: 952226523}
-  m_Layer: 0
+  - component: {fileID: 952226524}
+  m_Layer: 6
   m_Name: arbustoArbol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2978,6 +2989,27 @@ MonoBehaviour:
   estadoInicial: 0
   tiempoEnEstadoBien: 5
   tiempoParaCambioBien: 10
+--- !u!65 &952226524
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952226520}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.8708773, y: 3.73355, z: 1.775248}
+  m_Center: {x: -4.089309, y: -3.1387715, z: 2.9190476}
 --- !u!1 &1042201515 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bab1d901aa0ed344bbff92b84a32df0,
@@ -3276,8 +3308,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3e4ba8eeee4cfa54aad2c952f7c3cc26,
         type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e4ba8eeee4cfa54aad2c952f7c3cc26,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3496641134981863990, guid: 3e4ba8eeee4cfa54aad2c952f7c3cc26,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3806,8 +3848,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9bab1d901aa0ed344bbff92b84a32df0,
         type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9bab1d901aa0ed344bbff92b84a32df0,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8603806674150118374, guid: 9bab1d901aa0ed344bbff92b84a32df0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
