@@ -19,13 +19,15 @@ public class CambioEstados : MonoBehaviour
     // Variable estática para el contador de riegos compartido entre todos los objetos
     private static int vecesRegadas = 0;
 
+    public AudioManager audioManager;
+
     //Sonido
     public AudioSource SonidoFuente;
     public AudioSource SonidoRegar;
     public AudioSource SonidoAbono;
     public AudioSource SonidoCortar;
     public AudioSource SonidoFruta;
-
+    
 
     public enum EstadoPlanta
     {
@@ -65,10 +67,7 @@ public class CambioEstados : MonoBehaviour
                 // Realiza acciones para el estado de Abonar
                 Debug.Log("Abonando la planta");
                 CambiarEstado(EstadoPlanta.Bien);
-                if (SonidoAbono != null)
-                {
-                    SonidoAbono.Play();
-                }
+                AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
             }
             //else if (Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 3)
             else if (Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 3)
@@ -77,10 +76,7 @@ public class CambioEstados : MonoBehaviour
                 Debug.Log("Regando la planta");
                 CambiarEstado(EstadoPlanta.Bien);
                 vecesRegadas++; // Incrementa el contador de riegos
-                if (SonidoRegar != null)
-                {
-                    SonidoRegar.Play();
-                }
+                AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
             }
             //else if (Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.Bien && vecesRegadas < 3)
             else if (Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.Bien && vecesRegadas < 3)
@@ -89,14 +85,11 @@ public class CambioEstados : MonoBehaviour
                 Debug.Log("SobreRegando la planta");
                 CambiarEstado(EstadoPlanta.Bien);
                 vecesRegadas++; // Incrementa el contador de riegos
-                if (SonidoRegar != null)
-                {
-                    SonidoRegar.Play();
-                }
+                AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
             }
         }
 
-        if (Input.GetMouseButtonDown(1)) //TECLADO CLICK DERECHO
+        if (Input.GetKeyDown(KeyCode.R)) //TECLADO CLICK DERECHO
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -107,10 +100,7 @@ public class CambioEstados : MonoBehaviour
                 {
                     Debug.Log("Clic en objeto con tag 'Fuente'");
                     vecesRegadas = 0; // Reinicia el contador de riegos
-                    if (SonidoFuente != null)
-                    {
-                        SonidoFuente.Play();
-                    }
+                    AudioManagerSingleton.Instance.PlaySound(0); // 0 es el índice del sonido que deseas reproducir
                 }
             }
         }
