@@ -57,11 +57,19 @@ public class CambioEstados : MonoBehaviour
                 Debug.Log("Abonando la planta");
                 CambiarEstado(EstadoPlanta.Bien);
             }
-            else if (Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.NecesitaRegar)
+            else if (Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 3)
             {
                 // Realiza acciones para el estado de NecesitaRegar
                 Debug.Log("Regando la planta");
                 CambiarEstado(EstadoPlanta.Bien);
+                vecesRegadas++; // Incrementa el contador de riegos
+            }
+            else if (Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.Bien && vecesRegadas < 3)
+            {
+                // Realiza acciones para el estado de NecesitaRegar
+                Debug.Log("SobreRegando la planta");
+                CambiarEstado(EstadoPlanta.Bien);
+                vecesRegadas++; // Incrementa el contador de riegos
             }
         }
 
@@ -128,5 +136,11 @@ public class CambioEstados : MonoBehaviour
         {
             tiempoEnEstadoBien = 0f; // Reinicia el temporizador al entrar en el estado "Bien"
         }
-    }
+
+        // Si el jugador ha regado tres veces en total, desactiva la función de riego
+        if (vecesRegadas >= 3)
+        {
+            _isGazedAt = false;
+        }
+    }
 }
