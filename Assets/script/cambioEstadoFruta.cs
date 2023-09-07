@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CambioEstados : MonoBehaviour
+public class CambioEstadoFruta : MonoBehaviour
 {
     public GameObject prefabAbonar;
     public GameObject prefabBien;
-    public GameObject prefabNecesitaRegar;
+    public GameObject prefabRecogerFruta;
 
     public EstadoPlanta estadoInicial; // Estado inicial de la planta
     private EstadoPlanta estadoActual; // Estado actual de la planta
@@ -15,9 +15,6 @@ public class CambioEstados : MonoBehaviour
 
     //Mira al objetivo
     private bool _isGazedAt = false;
-
-    // Variable estática para el contador de riegos compartido entre todos los objetos
-    private static int vecesRegadas = 0;
 
     //Sonido
     public AudioSource SonidoFuente;
@@ -31,7 +28,7 @@ public class CambioEstados : MonoBehaviour
     {
         Abonar,
         Bien,
-        NecesitaRegar
+        RecogerFruta
     }
 
     public float tiempoEnEstadoBien = 0f; // Tiempo en el estado "Bien"
@@ -52,11 +49,11 @@ public class CambioEstados : MonoBehaviour
             // Verifica si ha pasado suficiente tiempo en el estado "Bien"
             if (tiempoEnEstadoBien >= tiempoParaCambioBien)
             {
-                CambiarEstado(EstadoPlanta.NecesitaRegar); // Cambia a "NecesitaRegar"
+                CambiarEstado(EstadoPlanta.RecogerFruta); // Cambia a "NecesitaRegar"
             }
         }
 
-        // Detecta la interacción del jugador y cambia el estado solo si el puntero está mirando el objeto
+        // Detecta la interacci�n del jugador y cambia el estado solo si el puntero est� mirando el objeto
         if (_isGazedAt)
         {
             //if (Input.GetAxis("Abonar") > 0 && estadoActual == EstadoPlanta.Abonar)
@@ -70,59 +67,27 @@ public class CambioEstados : MonoBehaviour
                     SonidoAbono.Play();
                 }
             }
-            //else if (Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 3)
-            else if (Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 3)
+            //else if (Input.GetAxis("Fruta") > 0 && estadoActual == EstadoPlanta.RecogerFruta)
+            else if (Input.GetKeyDown(KeyCode.F) && estadoActual == EstadoPlanta.RecogerFruta)
             {
                 // Realiza acciones para el estado de NecesitaRegar
                 Debug.Log("Regando la planta");
                 CambiarEstado(EstadoPlanta.Bien);
-                vecesRegadas++; // Incrementa el contador de riegos
-                if (SonidoRegar != null)
+                if (SonidoFruta != null)
                 {
-                    SonidoRegar.Play();
-                }
-            }
-            //else if (Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.Bien && vecesRegadas < 3)
-            else if (Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.Bien && vecesRegadas < 3)
-            {
-                // Realiza acciones para el estado de NecesitaRegar
-                Debug.Log("SobreRegando la planta");
-                CambiarEstado(EstadoPlanta.Bien);
-                vecesRegadas++; // Incrementa el contador de riegos
-                if (SonidoRegar != null)
-                {
-                    SonidoRegar.Play();
-                }
-            }
-        }
-
-        if (Input.GetMouseButtonDown(1)) //TECLADO CLICK DERECHO
-        {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.collider.CompareTag("Fuente"))
-                {
-                    Debug.Log("Clic en objeto con tag 'Fuente'");
-                    vecesRegadas = 0; // Reinicia el contador de riegos
-                    if (SonidoFuente != null)
-                    {
-                        SonidoFuente.Play();
-                    }
+                    SonidoFruta.Play();
                 }
             }
         }
     }
 
-    // Este método se llama cuando el objeto está siendo mirado.
+    // Este m�todo se llama cuando el objeto est� siendo mirado.
     public void OnPointerEnter()
     {
         _isGazedAt = true;
     }
 
-    // Este método se llama cuando el objeto ya no está siendo mirado.
+    // Este m�todo se llama cuando el objeto ya no est� siendo mirado.
     public void OnPointerExit()
     {
         _isGazedAt = false;
@@ -146,8 +111,8 @@ public class CambioEstados : MonoBehaviour
             case EstadoPlanta.Bien:
                 plantaActual = prefabBien;
                 break;
-            case EstadoPlanta.NecesitaRegar:
-                plantaActual = prefabNecesitaRegar;
+            case EstadoPlanta.RecogerFruta:
+                plantaActual = prefabRecogerFruta;
                 break;
             default:
                 break;
@@ -163,11 +128,5 @@ public class CambioEstados : MonoBehaviour
         {
             tiempoEnEstadoBien = 0f; // Reinicia el temporizador al entrar en el estado "Bien"
         }
-
-        // Si el jugador ha regado tres veces en total, desactiva la función de riego
-        if (vecesRegadas >= 3)
-        {
-            _isGazedAt = false;
-        }
-    }
+    }
 }
