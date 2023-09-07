@@ -13,22 +13,20 @@ public class CambioEstados : MonoBehaviour
 
     private GameObject plantaActual; // Referencia al prefab activo actualmente
 
-    //Mira al objetivo
+    //MIRA AL OBJETIVO
     private bool _isGazedAt = false;
 
-    // Variable estática para el contador de riegos compartido entre todos los objetos
+    //CONTADOR DE REGAR ENTRE TODOS LOS OBJETOS
     private static int vecesRegadas = 0;
 
+    //LIMITACIONES FUENTE
+    private int interaccionesConFuente = 0;
+    public int limiteInteraccionesFuente = 3;
+
+    //SONIDO
     public AudioManager audioManager;
 
-    //Sonido
-    public AudioSource SonidoFuente;
-    public AudioSource SonidoRegar;
-    public AudioSource SonidoAbono;
-    public AudioSource SonidoCortar;
-    public AudioSource SonidoFruta;
-    
-
+    //ESTADOS DE PLANTA
     public enum EstadoPlanta
     {
         Abonar,
@@ -36,6 +34,7 @@ public class CambioEstados : MonoBehaviour
         NecesitaRegar
     }
 
+    //TIEMPO
     public float tiempoEnEstadoBien = 0f; // Tiempo en el estado "Bien"
     public float tiempoParaCambioBien = 10f; // Tiempo para cambiar del estado "Bien" a "NecesitaRegar"
 
@@ -69,8 +68,8 @@ public class CambioEstados : MonoBehaviour
                 CambiarEstado(EstadoPlanta.Bien);
                 AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
             }
-            //else if (Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 3)
-            else if (Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 3)
+            //else if (Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 3) //JOYSTICK
+            else if (Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 3) //TECLADO
             {
                 // Realiza acciones para el estado de NecesitaRegar
                 Debug.Log("Regando la planta");
@@ -78,8 +77,8 @@ public class CambioEstados : MonoBehaviour
                 vecesRegadas++; // Incrementa el contador de riegos
                 AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
             }
-            //else if (Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.Bien && vecesRegadas < 3)
-            else if (Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.Bien && vecesRegadas < 3)
+            //else if (Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.Bien && vecesRegadas < 3) //JOYSTICK
+            else if (Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.Bien && vecesRegadas < 3) //TECLADO
             {
                 // Realiza acciones para el estado de NecesitaRegar
                 Debug.Log("SobreRegando la planta");
@@ -89,7 +88,8 @@ public class CambioEstados : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R)) //TECLADO CLICK DERECHO
+        //if (Input.GetAxis("Regar") > 0) //JOYSTICK
+        if (Input.GetKeyDown(KeyCode.R)) //TECLADO 
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -98,9 +98,21 @@ public class CambioEstados : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Fuente"))
                 {
-                    Debug.Log("Clic en objeto con tag 'Fuente'");
-                    vecesRegadas = 0; // Reinicia el contador de riegos
-                    AudioManagerSingleton.Instance.PlaySound(0); // 0 es el índice del sonido que deseas reproducir
+                    if (interaccionesConFuente < limiteInteraccionesFuente)
+                    {
+                        Debug.Log("Clic en objeto con tag 'Fuente'");
+                        interaccionesConFuente++; // Incrementa el contador de interacciones
+                        vecesRegadas = 0; // Reinicia el contador de riegos
+                        AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
+                        /*if (interaccionesConFuente >= 3)
+                        {
+                            _isGazedAt = false;
+                        }*/
+                    }
+                    else
+                    {
+                        Debug.Log("Límite de interacciones con la fuente alcanzado.");
+                    }
                 }
             }
         }
