@@ -22,12 +22,14 @@ public class ObjectsManagerLlamado : MonoBehaviour
             // Si el rayo golpea un objeto con la etiqueta "Fuente", establecemos seVeFuente a true.
             if (hit.collider.CompareTag("Fuente"))
             {
+                Debug.Log("MOSTRANDO REGADERA");
                 seVeFuente = true;
             }
 
             // Si el rayo golpea un objeto con la etiqueta "Abonar", establecemos seVeAbonar a true.
             if (hit.collider.CompareTag("Abonacion"))
             {
+                Debug.Log("MOSTRANDO ABONO");
                 seVeAbonar = true;
             }
         }

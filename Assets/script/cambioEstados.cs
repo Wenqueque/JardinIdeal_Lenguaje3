@@ -22,10 +22,7 @@ public class CambioEstados : MonoBehaviour
 
     //LIMITACIONES FUENTE
     private int interaccionesConFuente = 0;
-    public int limiteInteraccionesFuente = 3;
-
-    //SONIDO
-    public AudioManager audioManager;
+    public int limiteInteraccionesFuente = 3; //Esto cambia segun con cuantas plantas interactuamos
 
     //ESTADOS DE PLANTA
     public enum EstadoPlanta
@@ -64,7 +61,7 @@ public class CambioEstados : MonoBehaviour
             if (tiempoEnEstadoBien >= tiempoParaCambioBien)
             {
                 CambiarEstado(EstadoPlanta.NecesitaRegar); // Cambia a "NecesitaRegar"
-            }
+        }
         // Detecta la interacción del jugador y cambia el estado solo si el puntero está mirando el objeto
         if (_isGazedAt)
         {
@@ -76,8 +73,8 @@ public class CambioEstados : MonoBehaviour
                 CambiarEstado(EstadoPlanta.Bien);
                 AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
             }
-            //else if (Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 3) //JOYSTICK
-            else if (Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 3) //TECLADO
+            //else if (Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //JOYSTICK
+            else if (Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //TECLADO
             {
                 // Realiza acciones para el estado de NecesitaRegar
                 Debug.Log("Regando la planta");
@@ -85,8 +82,8 @@ public class CambioEstados : MonoBehaviour
                 vecesRegadas++; // Incrementa el contador de riegos
                 AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
             }
-            //else if (Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.Bien && vecesRegadas < 3) //JOYSTICK
-            else if (Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.Bien && vecesRegadas < 3) //TECLADO
+            //else if (Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //JOYSTICK
+            else if (Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //TECLADO
             {
                 // Realiza acciones para el estado de NecesitaRegar
                 Debug.Log("SobreRegando la planta");
@@ -95,7 +92,7 @@ public class CambioEstados : MonoBehaviour
                 AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
             }
         }
-
+        
         //if (Input.GetAxis("Regar") > 0) //JOYSTICK
         if (Input.GetKeyDown(KeyCode.R)) //TECLADO 
         {
@@ -112,14 +109,12 @@ public class CambioEstados : MonoBehaviour
                         interaccionesConFuente++; // Incrementa el contador de interacciones
                         vecesRegadas = 0; // Reinicia el contador de riegos
                         AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
-                        /*if (interaccionesConFuente >= 3)
-                        {
-                            _isGazedAt = false;
-                        }*/
+                        
                     }
                     else
                     {
                         Debug.Log("Límite de interacciones con la fuente alcanzado.");
+                        AudioManagerSingleton.Instance.PlaySound(6); // 0 es el índice del sonido que deseas reproducir
                     }
                 }
             }
@@ -178,7 +173,7 @@ public class CambioEstados : MonoBehaviour
         }
 
         // Si el jugador ha regado tres veces en total, desactiva la función de riego
-        if (vecesRegadas >= 3)
+        if (vecesRegadas >= 1)
         {
             _isGazedAt = false;
         }

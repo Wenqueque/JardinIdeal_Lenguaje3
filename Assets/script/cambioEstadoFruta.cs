@@ -56,8 +56,8 @@ public class CambioEstadoFruta : MonoBehaviour
         // Detecta la interacción del jugador y cambia el estado solo si el puntero está mirando el objeto
         if (_isGazedAt)
         {
-            if (Input.GetAxis("Abonar") > 0 && estadoActual == EstadoPlanta.Abonar)
-            //if (Input.GetKeyDown(KeyCode.B) && estadoActual == EstadoPlanta.Abonar)
+            //if (Input.GetAxis("Abonar") > 0 && estadoActual == EstadoPlanta.Abonar)
+            if (Input.GetKeyDown(KeyCode.B) && estadoActual == EstadoPlanta.Abonar)
             {
                 // Realiza acciones para el estado de Abonar
                 Debug.Log("Abonando la planta");
@@ -67,8 +67,8 @@ public class CambioEstadoFruta : MonoBehaviour
                     SonidoAbono.Play();
                 }
             }
-            else if (Input.GetAxis("Fruta") > 0 && estadoActual == EstadoPlanta.RecogerFruta)
-            //else if (Input.GetKeyDown(KeyCode.F) && estadoActual == EstadoPlanta.RecogerFruta)
+            //else if (Input.GetAxis("Fruta") > 0 && estadoActual == EstadoPlanta.RecogerFruta)
+            else if (Input.GetKeyDown(KeyCode.F) && estadoActual == EstadoPlanta.RecogerFruta)
             {
                 // Realiza acciones para el estado de NecesitaRegar
                 Debug.Log("Regando la planta");
