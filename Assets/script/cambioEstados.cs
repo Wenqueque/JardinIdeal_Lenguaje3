@@ -35,7 +35,7 @@ public class CambioEstados : MonoBehaviour
 
     //TIEMPO
     public float tiempoEnEstadoBien = 0f; // Tiempo en el estado "Bien"
-    public float tiempoParaCambioBien = 10f; // Tiempo para cambiar del estado "Bien" a "NecesitaRegar"
+    public float tiempoParaCambioBien = 30f; // Tiempo para cambiar del estado "Bien" a "NecesitaRegar"
 
     private void Start()
     {
