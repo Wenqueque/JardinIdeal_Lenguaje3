@@ -7,12 +7,13 @@ public class CambioEstados : MonoBehaviour
     public GameObject prefabAbonar;
     public GameObject prefabBien;
     public GameObject prefabNecesitaRegar;
+    public GameObject prefabSobreRegar;
 
     public EstadoPlanta estadoInicial; // Estado inicial de la planta
     private EstadoPlanta estadoActual; // Estado actual de la planta
 
     private GameObject plantaActual; // Referencia al prefab activo actualmente
-   
+
     //MIRA AL OBJETIVO
     private bool _isGazedAt = false;
 
@@ -31,7 +32,8 @@ public class CambioEstados : MonoBehaviour
     {
         Abonar,
         Bien,
-        NecesitaRegar
+        NecesitaRegar,
+        SobreRegar
     }
 
     //TIEMPO
@@ -55,8 +57,14 @@ public class CambioEstados : MonoBehaviour
             {
                 CambiarEstado(EstadoPlanta.NecesitaRegar); // Cambia a "NecesitaRegar"
             }
-        }
+        } else if (estadoActual == EstadoPlanta.SobreRegar)
+            tiempoEnEstadoBien += Time.deltaTime;
 
+            // Verifica si ha pasado suficiente tiempo en el estado "Bien"
+            if (tiempoEnEstadoBien >= tiempoParaCambioBien)
+            {
+                CambiarEstado(EstadoPlanta.NecesitaRegar); // Cambia a "NecesitaRegar"
+            }
         // Detecta la interacción del jugador y cambia el estado solo si el puntero está mirando el objeto
         if (_isGazedAt)
         {
@@ -82,7 +90,7 @@ public class CambioEstados : MonoBehaviour
             {
                 // Realiza acciones para el estado de NecesitaRegar
                 Debug.Log("SobreRegando la planta");
-                CambiarEstado(EstadoPlanta.Bien);
+                CambiarEstado(EstadoPlanta.SobreRegar);
                 vecesRegadas++; // Incrementa el contador de riegos
                 AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
             }
@@ -150,6 +158,9 @@ public class CambioEstados : MonoBehaviour
                 break;
             case EstadoPlanta.NecesitaRegar:
                 plantaActual = prefabNecesitaRegar;
+                break;
+                case EstadoPlanta.SobreRegar:
+                plantaActual = prefabSobreRegar;
                 break;
             default:
                 break;
