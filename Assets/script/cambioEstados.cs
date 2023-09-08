@@ -12,7 +12,7 @@ public class CambioEstados : MonoBehaviour
     private EstadoPlanta estadoActual; // Estado actual de la planta
 
     private GameObject plantaActual; // Referencia al prefab activo actualmente
-
+   
     //MIRA AL OBJETIVO
     private bool _isGazedAt = false;
 

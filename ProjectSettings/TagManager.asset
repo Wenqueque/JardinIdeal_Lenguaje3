@@ -10,6 +10,7 @@ TagManager:
   - noAbonado
   - Fuente
   - Planta
+  - Abonacion
   layers:
   - Default
   - TransparentFX
