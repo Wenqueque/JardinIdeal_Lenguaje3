@@ -14,28 +14,32 @@ public class ObjectsManagerLlamado : MonoBehaviour
         RaycastHit hit;
 
         // Inicialmente, asumimos que no se ve ningún objeto con la etiqueta "Fuente" ni "Abonar".
-        bool seVeFuente = false;
+        bool seVeRegadera = false;
         bool seVeAbonar = false;
+        bool seVeTijeras = false;
+        bool seVeMano = false;
 
         if (Physics.Raycast(ray, out hit, maxDistance, layerMask))
         {
             // Si el rayo golpea un objeto con la etiqueta "Fuente", establecemos seVeFuente a true.
-            if (hit.collider.CompareTag("Fuente"))
+            if (hit.collider.CompareTag("Fuente") || hit.collider.CompareTag("Marchito"))
             {
-                Debug.Log("MOSTRANDO REGADERA");
-                seVeFuente = true;
+                //Debug.Log("MOSTRANDO REGADERA");
+                seVeRegadera = true;
             }
 
             // Si el rayo golpea un objeto con la etiqueta "Abonar", establecemos seVeAbonar a true.
             if (hit.collider.CompareTag("Abonacion"))
             {
-                Debug.Log("MOSTRANDO ABONO");
+                //Debug.Log("MOSTRANDO ABONO");
                 seVeAbonar = true;
             }
         }
 
         // Configuramos el estado activo de los GameObjects en la lista en función de si se ven los objetos con las etiquetas "Fuente" y "Abonar".
-        objetosAMostrar[0].SetActive(seVeFuente);
+        objetosAMostrar[0].SetActive(seVeRegadera);
         objetosAMostrar[1].SetActive(seVeAbonar);
+        objetosAMostrar[2].SetActive(seVeTijeras);
+        objetosAMostrar[3].SetActive(seVeMano);
     }
 }

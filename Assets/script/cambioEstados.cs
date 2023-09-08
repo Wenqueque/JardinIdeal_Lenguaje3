@@ -22,7 +22,7 @@ public class CambioEstados : MonoBehaviour
 
     //LIMITACIONES FUENTE
     private int interaccionesConFuente = 0;
-    public int limiteInteraccionesFuente = 3; //Esto cambia segun con cuantas plantas interactuamos
+    public int limiteInteraccionesFuente = 5; //Esto cambia segun con cuantas plantas interactuamos
 
     //ESTADOS DE PLANTA
     public enum EstadoPlanta
