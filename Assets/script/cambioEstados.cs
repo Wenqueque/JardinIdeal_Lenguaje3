@@ -31,7 +31,7 @@ public class CambioEstados : MonoBehaviour
 
     //LIMITACIONES FUENTE
     private int interaccionesConFuente = 0;
-    public int limiteInteraccionesFuente = 5; //Esto cambia segun con cuantas plantas interactuamos
+    public int limiteInteraccionesFuente = 6; //Esto cambia segun con cuantas plantas interactuamos
 
     //ESTADOS DE PLANTA
     public enum EstadoPlanta
@@ -118,7 +118,7 @@ public class CambioEstados : MonoBehaviour
                         CambiarEstadoFuente((estadoActualIndexFuente + 1) % estadosFuente.Count);
 
                 // Verifica si hemos llegado al quinto estado y marcamos el cambio como finalizado
-                if (estadoActualIndexFuente == 4)
+                if (estadoActualIndexFuente == 5)
                 {
                     cambioFinalizadoFuente = true;
                 }
