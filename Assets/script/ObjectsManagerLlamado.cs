@@ -22,7 +22,7 @@ public class ObjectsManagerLlamado : MonoBehaviour
         if (Physics.Raycast(ray, out hit, maxDistance, layerMask))
         {
             // Si el rayo golpea un objeto con la etiqueta "Fuente", establecemos seVeFuente a true.
-            if (hit.collider.CompareTag("Fuente") || hit.collider.CompareTag("Marchito"))
+            if (hit.collider.CompareTag("Fuente") || hit.collider.CompareTag("Regadera"))
             {
                 //Debug.Log("MOSTRANDO REGADERA");
                 seVeRegadera = true;

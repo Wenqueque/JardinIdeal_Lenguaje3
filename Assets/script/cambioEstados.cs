@@ -8,7 +8,7 @@ public class CambioEstados : MonoBehaviour
     public List<GameObject> estadosFuente; // Lista de estados del objeto fuente
     private int estadoActualIndexFuente = 0; // �ndice del estado actual
     private bool cambioFinalizadoFuente = false; // Indicador de que se ha llegado al quinto estado
-     // Mira al objetivo
+    // Mira al objetivo
     private bool isGazedAtFuente = false;
     // Sonido
     public AudioSource SonidoFuente;
@@ -39,7 +39,8 @@ public class CambioEstados : MonoBehaviour
         Abonar,
         Bien,
         NecesitaRegar,
-        SobreRegar
+        SobreRegar, 
+        nada
     }
 
     //TIEMPO
@@ -66,14 +67,18 @@ public class CambioEstados : MonoBehaviour
             {
                 CambiarEstado(EstadoPlanta.NecesitaRegar); // Cambia a "NecesitaRegar"
             }
-        } else if (estadoActual == EstadoPlanta.SobreRegar)
-            tiempoEnEstadoBien += Time.deltaTime;
-
-            // Verifica si ha pasado suficiente tiempo en el estado "Bien"
-            if (tiempoEnEstadoBien >= tiempoParaCambioBien)
-            {
-                CambiarEstado(EstadoPlanta.NecesitaRegar); // Cambia a "NecesitaRegar"
         }
+        else if (estadoActual == EstadoPlanta.SobreRegar)
+        {
+            tiempoEnEstadoBien += Time.deltaTime;
+        }
+
+        // Verifica si ha pasado suficiente tiempo en el estado "Bien"
+        if (tiempoEnEstadoBien >= tiempoParaCambioBien)
+        {
+            CambiarEstado(EstadoPlanta.NecesitaRegar); // Cambia a "NecesitaRegar"
+        }
+
         //if (Input.GetAxis("Abonar") > 0 && estadoActual == EstadoPlanta.Abonar)
         if (_isGazedAt && Input.GetKeyDown(KeyCode.B) && estadoActual == EstadoPlanta.Abonar)
         {
@@ -100,33 +105,34 @@ public class CambioEstados : MonoBehaviour
             vecesRegadas++; // Incrementa el contador de riegos
             AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
         }
-        if (isGazedAtFuente && !cambioFinalizadoFuente)
-        {
-        //if (Input.GetAxis("Regar") > 0) //JOYSTICK
-        if (Input.GetKeyDown(KeyCode.R)) //TECLADO 
-        {
-            
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit))
+        if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetKeyDown(KeyCode.R))
+        {
+            Collider[] colliders = GetComponentsInChildren<Collider>(); // Obtén los colliders de los objetos hijos del puntero
+
+            foreach (Collider collider in colliders)
             {
-                if (hit.collider.CompareTag("Fuente"))
+                if (collider.CompareTag("Fuente"))
                 {
                     if (interaccionesConFuente < limiteInteraccionesFuente)
                     {
                         CambiarEstadoFuente((estadoActualIndexFuente + 1) % estadosFuente.Count);
 
-                // Verifica si hemos llegado al quinto estado y marcamos el cambio como finalizado
-                if (estadoActualIndexFuente == 5)
-                {
-                    cambioFinalizadoFuente = true;
-                }
+                        // Verifica si hemos llegado al quinto estado y marcamos el cambio como finalizado
+                        if (estadoActualIndexFuente == 5) // Cambiado de 5 a 4, ya que los índices comienzan desde 0
+                        {
+                            cambioFinalizadoFuente = true;
+                        }
+
                         Debug.Log("Clic en objeto con tag 'Fuente'");
                         interaccionesConFuente++; // Incrementa el contador de interacciones
                         vecesRegadas = 0; // Reinicia el contador de riegos
                         AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
-                        
+
+                        // Puedes desactivar el collider del objeto puntero invisible para evitar múltiples interacciones
+                        collider.enabled = false;
+
+                        break; // Sal del bucle, ya que hemos encontrado una colisión
                     }
                     else
                     {
@@ -135,26 +141,8 @@ public class CambioEstados : MonoBehaviour
                     }
                 }
             }
-            }
         }
-            //fuente------
-            // Detecta la interacci�n del jugador y cambia el estado solo si el puntero est� mirando el objeto
-        //if (isGazedAtFuente && !cambioFinalizadoFuente)
-        //{
-            //if (Input.GetAxis("Regar") > 0)
-           // if (Input.GetKeyDown(KeyCode.R))
-            //{
-              //  CambiarEstadoFuente((estadoActualIndexFuente + 1) % estadosFuente.Count);
 
-                // Verifica si hemos llegado al quinto estado y marcamos el cambio como finalizado
-                //if (estadoActualIndexFuente == 4)
-                //{
-                  //  cambioFinalizadoFuente = true;
-                //}
-            //}
-        //}
-        //fuente------
-        
     }
 
     // Este método se llama cuando el objeto está siendo mirado.
@@ -171,7 +159,7 @@ public class CambioEstados : MonoBehaviour
         isGazedAtFuente = false;
     }
 
-private void CambiarEstadoFuente(int nuevoEstadoIndexFuente)
+    private void CambiarEstadoFuente(int nuevoEstadoIndexFuente)
     {
         // Desactiva el estado actual
         estadosFuente[estadoActualIndexFuente].SetActive(false);
@@ -182,6 +170,7 @@ private void CambiarEstadoFuente(int nuevoEstadoIndexFuente)
         // Actualiza el �ndice del estado actual
         estadoActualIndexFuente = nuevoEstadoIndexFuente;
     }
+
     private void CambiarEstado(EstadoPlanta nuevoEstado)
     {
         estadoActual = nuevoEstado;
@@ -203,7 +192,7 @@ private void CambiarEstadoFuente(int nuevoEstadoIndexFuente)
             case EstadoPlanta.NecesitaRegar:
                 plantaActual = prefabNecesitaRegar;
                 break;
-                case EstadoPlanta.SobreRegar:
+            case EstadoPlanta.SobreRegar:
                 plantaActual = prefabSobreRegar;
                 break;
             default:

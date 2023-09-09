@@ -11,6 +11,8 @@ TagManager:
   - Fuente
   - Planta
   - Abonacion
+  - SobreRegado
+  - Regadera
   layers:
   - Default
   - TransparentFX
