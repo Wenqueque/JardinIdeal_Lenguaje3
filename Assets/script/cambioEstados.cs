@@ -62,35 +62,31 @@ public class CambioEstados : MonoBehaviour
             {
                 CambiarEstado(EstadoPlanta.NecesitaRegar); // Cambia a "NecesitaRegar"
         }
-        // Detecta la interacción del jugador y cambia el estado solo si el puntero está mirando el objeto
-        if (_isGazedAt)
+        //if (Input.GetAxis("Abonar") > 0 && estadoActual == EstadoPlanta.Abonar)
+        if (_isGazedAt && Input.GetKeyDown(KeyCode.B) && estadoActual == EstadoPlanta.Abonar)
         {
-            //if (Input.GetAxis("Abonar") > 0 && estadoActual == EstadoPlanta.Abonar)
-            if (Input.GetKeyDown(KeyCode.B) && estadoActual == EstadoPlanta.Abonar)
-            {
-                // Realiza acciones para el estado de Abonar
-                Debug.Log("Abonando la planta");
-                CambiarEstado(EstadoPlanta.Bien);
-                AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
-            }
-            //else if (Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //JOYSTICK
-            else if (Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //TECLADO
-            {
-                // Realiza acciones para el estado de NecesitaRegar
-                Debug.Log("Regando la planta");
-                CambiarEstado(EstadoPlanta.Bien);
-                vecesRegadas++; // Incrementa el contador de riegos
-                AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
-            }
-            //else if (Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //JOYSTICK
-            else if (Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //TECLADO
-            {
-                // Realiza acciones para el estado de NecesitaRegar
-                Debug.Log("SobreRegando la planta");
-                CambiarEstado(EstadoPlanta.SobreRegar);
-                vecesRegadas++; // Incrementa el contador de riegos
-                AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
-            }
+            // Realiza acciones para el estado de Abonar
+            Debug.Log("Abonando la planta");
+            CambiarEstado(EstadoPlanta.Bien);
+            AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
+        }
+        //else if (Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //JOYSTICK
+        else if (_isGazedAt && Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //TECLADO
+        {
+            // Realiza acciones para el estado de NecesitaRegar
+            Debug.Log("Regando la planta");
+            CambiarEstado(EstadoPlanta.Bien);
+            vecesRegadas++; // Incrementa el contador de riegos
+            AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
+        }
+        //else if (Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //JOYSTICK
+        else if (_isGazedAt && Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //TECLADO
+        {
+            // Realiza acciones para el estado de NecesitaRegar
+            Debug.Log("SobreRegando la planta");
+            CambiarEstado(EstadoPlanta.SobreRegar);
+            vecesRegadas++; // Incrementa el contador de riegos
+            AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
         }
         
         //if (Input.GetAxis("Regar") > 0) //JOYSTICK
