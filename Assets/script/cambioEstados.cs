@@ -82,6 +82,18 @@ public class CambioEstados : MonoBehaviour
             CambiarEstado(EstadoPlanta.NecesitaRegar); // Cambia a "NecesitaRegar"
         }
 
+        //Verifica si se llegó al límite de interacciones con la fuente y vecesRegadas es igual a 1
+        if (interaccionesConFuente >= limiteInteraccionesFuente && vecesRegadas == 1)
+            {
+                // Reinicia los parámetros apropiados aquí
+                interaccionesConFuente = 0;
+                cambioFinalizadoFuente = false;
+                estadoActual = estadoInicial;
+
+            AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
+                // También puedes reiniciar otros parámetros si es necesario
+        }
+
         if (_isGazedAt && Input.GetAxis("Abonar") > 0 && estadoActual == EstadoPlanta.Abonar)
         //if (_isGazedAt && Input.GetKeyDown(KeyCode.B) && estadoActual == EstadoPlanta.Abonar)
         {
@@ -156,7 +168,6 @@ public class CambioEstados : MonoBehaviour
                 }
             }
         }
-
 
     }
 
