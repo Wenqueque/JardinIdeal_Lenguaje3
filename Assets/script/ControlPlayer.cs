@@ -21,7 +21,13 @@ public class ControlPlayer : MonoBehaviour
     //SONIDO
     public AudioSource pasos;
     private bool Hactivo;
-    private bool Vactivo;
+    private bool Vactivo;
+
+    //ILUMINACION
+    public GameObject sol; // Referencia al GameObject del sol
+    public float tiempoParaDesaparecer = 5f; // Tiempo en segundos para que el sol desaparezca
+    private float tiempoInactivo = 0f; // Tiempo en segundos de inactividad
+
     private void Awake()
     {
         player = GetComponent<CharacterController>();
@@ -34,7 +40,7 @@ public class ControlPlayer : MonoBehaviour
     private void Update()
     {
         // Buscar objetos con la etiqueta "marchito" en la escena
-        GameObject[] objetosMarchitos = GameObject.FindGameObjectsWithTag ("Marchito");
+        GameObject[] objetosMarchitos = GameObject.FindGameObjectsWithTag("Marchito");
         // Obtén las entradas de movimiento del jugador
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
@@ -62,22 +68,37 @@ public class ControlPlayer : MonoBehaviour
         // Aplica la velocidad vertical calculada
         player.Move(velocity * Time.deltaTime);
 
-        // Obtener la posición actual del jugador
-        Vector3 posicionJugador = transform.position;
-// Si hay objetos "marchito" en la escena, aplicar límites de movimiento
-        if (objetosMarchitos.Length > 0)
+        // Verificar si el jugador se está moviendo
+        if (Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f)
         {
-        // Limitar el movimiento en el eje X
-        posicionJugador.x = Mathf.Clamp(posicionJugador.x, limiteXMin, limiteXMax);
-
-        // Limitar el movimiento en el eje Z
-        posicionJugador.z = Mathf.Clamp(posicionJugador.z, limiteZMin, limiteZMax);
-
-        // Asignar la nueva posición al jugador
-        transform.position = posicionJugador;
+            tiempoInactivo = 0f; // Restablecer el tiempo de inactividad
+            MostrarSol(true); // Mostrar el sol
+        }
+        else
+        {
+            tiempoInactivo += Time.deltaTime; // Incrementar el tiempo de inactividad
+            if (tiempoInactivo >= tiempoParaDesaparecer)
+            {
+                MostrarSol(false); // Ocultar el sol después de 5 segundos de inactividad
+            }
         }
 
-      //SONIDO-----------------------------------------------------
+        // Obtener la posición actual del jugador
+        Vector3 posicionJugador = transform.position;
+        // Si hay objetos "marchito" en la escena, aplicar límites de movimiento
+        if (objetosMarchitos.Length > 0)
+        {
+            // Limitar el movimiento en el eje X
+            posicionJugador.x = Mathf.Clamp(posicionJugador.x, limiteXMin, limiteXMax);
+
+            // Limitar el movimiento en el eje Z
+            posicionJugador.z = Mathf.Clamp(posicionJugador.z, limiteZMin, limiteZMax);
+
+            // Asignar la nueva posición al jugador
+            transform.position = posicionJugador;
+        }
+
+        //SONIDO-----------------------------------------------------
 
         if (Input.GetButtonDown("Horizontal"))
         {
@@ -112,8 +133,16 @@ public class ControlPlayer : MonoBehaviour
             if (Hactivo == false)
             {
                 pasos.Pause();
-            }
-        }  
+            }
+        }
+    }
+
+    private void MostrarSol(bool mostrar)
+    {
+        if (sol != null)
+        {
+            sol.SetActive(mostrar);
+        }
     }
 
 }

@@ -12,7 +12,14 @@ public class CambioEstados : MonoBehaviour
     private bool isGazedAtFuente = false;
     // Sonido
     public AudioSource SonidoFuente;
+    //Cooldown
+    private bool puedeInteractuarFuente = true;
+    public float tiempoEsperaInteraccion = 1.0f; // Tiempo de espera en segundos
+    //Limitaciones
+    private int interaccionesConFuente = 0;
+    public int limiteInteraccionesFuente = 6; //Esto cambia segun con cuantas plantas interactuamos
     //fuente-------
+
     public GameObject prefabAbonar;
     public GameObject prefabBien;
     public GameObject prefabNecesitaRegar;
@@ -27,11 +34,7 @@ public class CambioEstados : MonoBehaviour
     private bool _isGazedAt = false;
 
     //CONTADOR DE REGAR ENTRE TODOS LOS OBJETOS
-    private static int vecesRegadas = 0;
-
-    //LIMITACIONES FUENTE
-    private int interaccionesConFuente = 0;
-    public int limiteInteraccionesFuente = 6; //Esto cambia segun con cuantas plantas interactuamos
+    private static int vecesRegadas = 1;
 
     //ESTADOS DE PLANTA
     public enum EstadoPlanta
@@ -39,7 +42,7 @@ public class CambioEstados : MonoBehaviour
         Abonar,
         Bien,
         NecesitaRegar,
-        SobreRegar, 
+        SobreRegar,
         nada
     }
 
@@ -79,15 +82,15 @@ public class CambioEstados : MonoBehaviour
             CambiarEstado(EstadoPlanta.NecesitaRegar); // Cambia a "NecesitaRegar"
         }
 
-        //if (_isGazedAt && Input.GetAxis("Abonar") > 0 && estadoActual == EstadoPlanta.Abonar)
-        if (_isGazedAt && Input.GetKeyDown(KeyCode.B) && estadoActual == EstadoPlanta.Abonar)
+        if (_isGazedAt && Input.GetAxis("Abonar") > 0 && estadoActual == EstadoPlanta.Abonar)
+        //if (_isGazedAt && Input.GetKeyDown(KeyCode.B) && estadoActual == EstadoPlanta.Abonar)
         {
             // Realiza acciones para el estado de Abonar
             Debug.Log("Abonando la planta");
             CambiarEstado(EstadoPlanta.Bien);
             AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
         }
-        //else if (Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //JOYSTICK
+        //else if (_isGazedAt && Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //JOYSTICK
         else if (_isGazedAt && Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //TECLADO
         {
             // Realiza acciones para el estado de NecesitaRegar
@@ -96,7 +99,7 @@ public class CambioEstados : MonoBehaviour
             vecesRegadas++; // Incrementa el contador de riegos
             AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
         }
-        //else if (Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //JOYSTICK
+        //else if (_isGazedAt && Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //JOYSTICK
         else if (_isGazedAt && Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //TECLADO
         {
             // Realiza acciones para el estado de NecesitaRegar
@@ -109,40 +112,51 @@ public class CambioEstados : MonoBehaviour
         //if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetAxis("Regar") > 0)
         if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetKeyDown(KeyCode.R))
         {
-            Collider[] colliders = GetComponentsInChildren<Collider>(); // Obtén los colliders de los objetos hijos del puntero
-
-            foreach (Collider collider in colliders)
+            if (puedeInteractuarFuente)
             {
-                if (collider.CompareTag("Fuente"))
+                Collider[] colliders = GetComponentsInChildren<Collider>(); // Obtén los colliders de los objetos hijos del puntero
+
+                foreach (Collider collider in colliders)
                 {
-                    if (interaccionesConFuente < limiteInteraccionesFuente)
+                    if (collider.CompareTag("Fuente"))
                     {
-                        CambiarEstadoFuente((estadoActualIndexFuente + 1) % estadosFuente.Count);
-
-                        // Verifica si hemos llegado al quinto estado y marcamos el cambio como finalizado
-                        if (estadoActualIndexFuente == 5) // Cambiado de 5 a 4, ya que los índices comienzan desde 0
+                        if (interaccionesConFuente < limiteInteraccionesFuente)
                         {
-                            cambioFinalizadoFuente = true;
+                            // Realiza las acciones de interacción con la fuente aquí
+
+                            // Después de la interacción, espera un tiempo antes de permitir otra interacción
+                            puedeInteractuarFuente = false;
+                            StartCoroutine(PermitirInteraccionDespuesDeEspera());
+
+                            CambiarEstadoFuente((estadoActualIndexFuente + 1) % estadosFuente.Count);
+
+                            // Verifica si hemos llegado al quinto estado y marcamos el cambio como finalizado
+                            if (estadoActualIndexFuente == 6) // Cambiado de 5 a 4, ya que los índices comienzan desde 0
+                            {
+                                cambioFinalizadoFuente = true;
+                            }
+
+                            Debug.Log("Clic en objeto con tag 'Fuente'");
+                            interaccionesConFuente++; // Incrementa el contador de interacciones
+
+                            vecesRegadas = 0; // Reinicia el contador de riegos
+                            AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
+
+                            // Puedes desactivar el collider del objeto puntero invisible para evitar múltiples interacciones
+                            collider.enabled = false;
+
+                            break; // Sal del bucle, ya que hemos encontrado una colisión
                         }
-
-                        Debug.Log("Clic en objeto con tag 'Fuente'");
-                        interaccionesConFuente++; // Incrementa el contador de interacciones
-                        vecesRegadas = 0; // Reinicia el contador de riegos
-                        AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
-
-                        // Puedes desactivar el collider del objeto puntero invisible para evitar múltiples interacciones
-                        collider.enabled = false;
-
-                        break; // Sal del bucle, ya que hemos encontrado una colisión
-                    }
-                    else
-                    {
-                        Debug.Log("Límite de interacciones con la fuente alcanzado.");
-                        AudioManagerSingleton.Instance.PlaySound(6); // 0 es el índice del sonido que deseas reproducir
+                        else
+                        {
+                            Debug.Log("Límite de interacciones con la fuente alcanzado.");
+                            AudioManagerSingleton.Instance.PlaySound(6); // 0 es el índice del sonido que deseas reproducir
+                        }
                     }
                 }
             }
         }
+
 
     }
 
@@ -158,6 +172,12 @@ public class CambioEstados : MonoBehaviour
     {
         _isGazedAt = false;
         isGazedAtFuente = false;
+    }
+
+    private IEnumerator PermitirInteraccionDespuesDeEspera()
+    {
+        yield return new WaitForSeconds(tiempoEsperaInteraccion);
+        puedeInteractuarFuente = true;
     }
 
     private void CambiarEstadoFuente(int nuevoEstadoIndexFuente)
@@ -215,6 +235,6 @@ public class CambioEstados : MonoBehaviour
         if (vecesRegadas >= 1)
         {
             _isGazedAt = false;
-        }
-    }
+        }
+    }
 }
