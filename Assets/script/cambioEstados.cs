@@ -79,7 +79,7 @@ public class CambioEstados : MonoBehaviour
             CambiarEstado(EstadoPlanta.NecesitaRegar); // Cambia a "NecesitaRegar"
         }
 
-        //if (Input.GetAxis("Abonar") > 0 && estadoActual == EstadoPlanta.Abonar)
+        //if (_isGazedAt && Input.GetAxis("Abonar") > 0 && estadoActual == EstadoPlanta.Abonar)
         if (_isGazedAt && Input.GetKeyDown(KeyCode.B) && estadoActual == EstadoPlanta.Abonar)
         {
             // Realiza acciones para el estado de Abonar
@@ -106,6 +106,7 @@ public class CambioEstados : MonoBehaviour
             AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
         }
 
+        //if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetAxis("Regar") > 0)
         if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetKeyDown(KeyCode.R))
         {
             Collider[] colliders = GetComponentsInChildren<Collider>(); // Obtén los colliders de los objetos hijos del puntero
