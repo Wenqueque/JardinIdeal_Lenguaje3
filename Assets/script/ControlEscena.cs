@@ -14,7 +14,21 @@ public class ControlEscena : MonoBehaviour
     public Transform posicionesArcos3; // Transform que define la posición y rotación del arco 3
     public Transform posicionesArcos4; // Transform que define la posición y rotación del arco 4
 
+public float tiempoParaRecargar = 5f; // Tiempo en segundos antes de recargar la escena
+    private float tiempoTranscurrido = 0f; // Tiempo transcurrido desde que se activó la recarga
 
+private cambioEstados scriptCambioEstados; // Variable para almacenar la referencia al script "cambioEstados"
+
+private void Start()
+{
+    // Obtener la referencia al script "cambioEstados" desde el GameObject que lo contiene
+    scriptCambioEstados = GameObject.FindObjectOfType<cambioEstados>();
+
+    if (scriptCambioEstados == null)
+    {
+        Debug.LogError("No se encontró el script 'cambioEstados' en la escena.");
+    }
+}
 
     void Update()
     {
@@ -35,5 +49,25 @@ public class ControlEscena : MonoBehaviour
             Instantiate(prefabArcosAbiertos3, posicionesArcos3.position, Quaternion.Euler(posicionesArcos3.rotation.eulerAngles));
             Instantiate(prefabArcosAbiertos4, posicionesArcos4.position, Quaternion.Euler(posicionesArcos4.rotation.eulerAngles));
         }
-    }
-}
+
+        // Buscar objetos con las etiquetas "Marchito" o "SobreRegado" en la escena
+        //GameObject[] objetosMarchito = GameObject.FindGameObjectsWithTag("Marchito");
+        GameObject[] objetosSobreRegado = GameObject.FindGameObjectsWithTag("SobreRegado");
+
+        // Si se encuentra al menos un objeto con alguna de estas etiquetas, recargar la escena
+       if ((objetosSobreRegado.Length > 0 && scriptCambioEstados.interaccionesConFuente >= scriptCambioEstados.limiteInteraccionesFuente))
+   
+        {
+            tiempoTranscurrido += Time.deltaTime;
+
+            if (tiempoTranscurrido >= tiempoParaRecargar)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
+        else
+        {
+            tiempoTranscurrido = 0f;
+        }
+    }
+    }

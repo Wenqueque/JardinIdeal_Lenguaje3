@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CambioEstados : MonoBehaviour
+public class cambioEstados : MonoBehaviour
 {
     //fuente--------
     public List<GameObject> estadosFuente; // Lista de estados del objeto fuente
-    private int estadoActualIndexFuente = 0; // �ndice del estado actual
+    private int estadoActualIndexFuente = 0; //  ndice del estado actual
     private bool cambioFinalizadoFuente = false; // Indicador de que se ha llegado al quinto estado
     // Mira al objetivo
     private bool isGazedAtFuente = false;
@@ -16,7 +16,7 @@ public class CambioEstados : MonoBehaviour
     private bool puedeInteractuarFuente = true;
     public float tiempoEsperaInteraccion = 1.0f; // Tiempo de espera en segundos
     //Limitaciones
-    private int interaccionesConFuente = 0;
+    public int interaccionesConFuente = 0;
     public int limiteInteraccionesFuente = 6; //Esto cambia segun con cuantas plantas interactuamos
     //fuente-------
 
@@ -58,7 +58,11 @@ public class CambioEstados : MonoBehaviour
         CambiarEstadoFuente(estadoActualIndexFuente); // Inicializa el estado visual
         //fuente-------
     }
-
+private IEnumerator PermitirInteraccionDespuesDeEspera()
+    {
+        yield return new WaitForSeconds(tiempoEsperaInteraccion);
+        puedeInteractuarFuente = true;
+    }
     private void Update()
     {
         if (estadoActual == EstadoPlanta.Bien)
@@ -86,7 +90,7 @@ public class CambioEstados : MonoBehaviour
         if (interaccionesConFuente >= limiteInteraccionesFuente && vecesRegadas == 1)
             {
                 // Reinicia los parámetros apropiados aquí
-                interaccionesConFuente = 0;
+                //interaccionesConFuente = 0;
                 cambioFinalizadoFuente = false;
                 estadoActual = estadoInicial;
 
@@ -159,6 +163,12 @@ public class CambioEstados : MonoBehaviour
 
                             break; // Sal del bucle, ya que hemos encontrado una colisión
                         }
+                        if (interaccionesConFuente >= limiteInteraccionesFuente)
+    {
+        // Si llegamos al límite, desactivamos la interacción con la fuente
+        Debug.Log("Límite de interacciones con la fuente alcanzado.");
+        puedeInteractuarFuente = false;
+    }
                         else
                         {
                             Debug.Log("Límite de interacciones con la fuente alcanzado.");
@@ -185,11 +195,7 @@ public class CambioEstados : MonoBehaviour
         isGazedAtFuente = false;
     }
 
-    private IEnumerator PermitirInteraccionDespuesDeEspera()
-    {
-        yield return new WaitForSeconds(tiempoEsperaInteraccion);
-        puedeInteractuarFuente = true;
-    }
+    
 
     private void CambiarEstadoFuente(int nuevoEstadoIndexFuente)
     {
@@ -199,7 +205,7 @@ public class CambioEstados : MonoBehaviour
         // Activa el nuevo estado
         estadosFuente[nuevoEstadoIndexFuente].SetActive(true);
 
-        // Actualiza el �ndice del estado actual
+        // Actualiza el  ndice del estado actual
         estadoActualIndexFuente = nuevoEstadoIndexFuente;
     }
 
@@ -246,6 +252,6 @@ public class CambioEstados : MonoBehaviour
         if (vecesRegadas >= 1)
         {
             _isGazedAt = false;
-        }
-    }
+        }
+    }
 }

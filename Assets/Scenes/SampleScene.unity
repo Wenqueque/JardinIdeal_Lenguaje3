@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.42
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.38804772, g: 0.46658236, b: 0.47520256, a: 0.42}
+  m_IndirectSpecularColor: {r: 0.38821253, g: 0.4667289, b: 0.4753804, a: 0.42}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1027,6 +1027,7 @@ MonoBehaviour:
   - {fileID: 939262478}
   SonidoFuente: {fileID: 0}
   tiempoEsperaInteraccion: 1
+  interaccionesConFuente: 0
   limiteInteraccionesFuente: 5
   prefabAbonar: {fileID: 2020521050}
   prefabBien: {fileID: 689294101}
@@ -1238,6 +1239,7 @@ MonoBehaviour:
   - {fileID: 704626521}
   SonidoFuente: {fileID: 445101463}
   tiempoEsperaInteraccion: 1
+  interaccionesConFuente: 0
   limiteInteraccionesFuente: 6
   prefabAbonar: {fileID: 0}
   prefabBien: {fileID: 0}
@@ -1870,6 +1872,7 @@ MonoBehaviour:
   - {fileID: 939262478}
   SonidoFuente: {fileID: 0}
   tiempoEsperaInteraccion: 1
+  interaccionesConFuente: 0
   limiteInteraccionesFuente: 5
   prefabAbonar: {fileID: 0}
   prefabBien: {fileID: 1592333310}
@@ -7238,6 +7241,7 @@ MonoBehaviour:
   - {fileID: 939262478}
   SonidoFuente: {fileID: 0}
   tiempoEsperaInteraccion: 1
+  interaccionesConFuente: 0
   limiteInteraccionesFuente: 5
   prefabAbonar: {fileID: 0}
   prefabBien: {fileID: 1454952824}
@@ -11236,6 +11240,7 @@ MonoBehaviour:
   - {fileID: 939262478}
   SonidoFuente: {fileID: 0}
   tiempoEsperaInteraccion: 1
+  interaccionesConFuente: 0
   limiteInteraccionesFuente: 5
   prefabAbonar: {fileID: 0}
   prefabBien: {fileID: 1689236109}
@@ -18066,6 +18071,7 @@ MonoBehaviour:
   - {fileID: 939262478}
   SonidoFuente: {fileID: 0}
   tiempoEsperaInteraccion: 1
+  interaccionesConFuente: 0
   limiteInteraccionesFuente: 5
   prefabAbonar: {fileID: 0}
   prefabBien: {fileID: 734794060}
@@ -19411,6 +19417,8 @@ GameObject:
   - component: {fileID: 924048959}
   - component: {fileID: 924048963}
   - component: {fileID: 924048962}
+  - component: {fileID: 924048964}
+  - component: {fileID: 924048965}
   - component: {fileID: 924048961}
   - component: {fileID: 924048960}
   m_Layer: 0
@@ -19429,7 +19437,7 @@ Transform:
   m_GameObject: {fileID: 924048958}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.69, y: 0.5, z: 0}
+  m_LocalPosition: {x: 23.46, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19479,8 +19487,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.31624794, y: 2.4370184, z: 3.1046727}
-  m_Center: {x: -14.23, y: 0.7185092, z: -0.054973006}
+  m_Size: {x: 1.97, y: 4, z: 3.48}
+  m_Center: {x: -44.63, y: 0.7185092, z: -0.5}
 --- !u!65 &924048963
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19500,8 +19508,50 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.31624794, y: 2.4370184, z: 3.1046727}
-  m_Center: {x: -0.34187603, y: 0.7185092, z: -0.054973006}
+  m_Size: {x: 2.62, y: 3.07, z: 3.39}
+  m_Center: {x: -1.8, y: 1.21, z: -0.054973006}
+--- !u!65 &924048964
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924048958}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.5, y: 5.07, z: 3.53}
+  m_Center: {x: -23.4, y: 1.78, z: -20.9}
+--- !u!65 &924048965
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924048958}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: -3.89, y: 4.3, z: 2.24}
+  m_Center: {x: -23.2, y: 1.85, z: 20}
 --- !u!1001 &926188794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19735,6 +19785,7 @@ MonoBehaviour:
   - {fileID: 939262478}
   SonidoFuente: {fileID: 0}
   tiempoEsperaInteraccion: 1
+  interaccionesConFuente: 0
   limiteInteraccionesFuente: 5
   prefabAbonar: {fileID: 1242642611}
   prefabBien: {fileID: 1042201515}
@@ -25302,6 +25353,7 @@ MonoBehaviour:
     type: 3}
   posicionesArcos4: {fileID: 2680886238669755196, guid: 95861e7a404147040b8dde191c79dbc6,
     type: 3}
+  tiempoParaRecargar: 5
 --- !u!1 &1328279667 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7e7835eabbdde8f4bb442ba2c3c660dd,
