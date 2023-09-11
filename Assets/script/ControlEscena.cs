@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ControlEscena : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class ControlEscena : MonoBehaviour
     public Transform posicionesArcos2; // Transform que define la posición y rotación del arco 2
     public Transform posicionesArcos3; // Transform que define la posición y rotación del arco 3
     public Transform posicionesArcos4; // Transform que define la posición y rotación del arco 4
+
+
 
     void Update()
     {
