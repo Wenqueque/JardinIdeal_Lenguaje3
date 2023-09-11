@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.42
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.38804772, g: 0.46658236, b: 0.47520256, a: 0.42}
+  m_IndirectSpecularColor: {r: 0.38821253, g: 0.4667289, b: 0.4753804, a: 0.42}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -552,7 +552,7 @@ PrefabInstance:
     - target: {fileID: -5824510187379060028, guid: 3e18c45637300af4184016195088b9b9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1461304994638716399, guid: 3e18c45637300af4184016195088b9b9,
         type: 3}
@@ -563,6 +563,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: arco-cerrado (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e18c45637300af4184016195088b9b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: arcosCerrados
       objectReference: {fileID: 0}
     - target: {fileID: 8521902485874960664, guid: 3e18c45637300af4184016195088b9b9,
         type: 3}
@@ -808,7 +813,7 @@ PrefabInstance:
     - target: {fileID: -5824510187379060028, guid: 3e18c45637300af4184016195088b9b9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1461304994638716399, guid: 3e18c45637300af4184016195088b9b9,
         type: 3}
@@ -819,6 +824,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: arco-cerrado (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e18c45637300af4184016195088b9b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: arcosCerrados
       objectReference: {fileID: 0}
     - target: {fileID: 8521902485874960664, guid: 3e18c45637300af4184016195088b9b9,
         type: 3}
@@ -2286,7 +2296,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &263451850
 Transform:
   m_ObjectHideFlags: 0
@@ -7007,7 +7017,7 @@ PrefabInstance:
     - target: {fileID: -5824510187379060028, guid: 3e18c45637300af4184016195088b9b9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1461304994638716399, guid: 3e18c45637300af4184016195088b9b9,
         type: 3}
@@ -7023,6 +7033,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e18c45637300af4184016195088b9b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: arcosCerrados
       objectReference: {fileID: 0}
     - target: {fileID: 8521902485874960664, guid: 3e18c45637300af4184016195088b9b9,
         type: 3}
@@ -15791,7 +15806,7 @@ PrefabInstance:
     - target: {fileID: -5824510187379060028, guid: 3e18c45637300af4184016195088b9b9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1461304994638716399, guid: 3e18c45637300af4184016195088b9b9,
         type: 3}
@@ -15802,6 +15817,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: arco-cerrado
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e18c45637300af4184016195088b9b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: arcosCerrados
       objectReference: {fileID: 0}
     - target: {fileID: 8521902485874960664, guid: 3e18c45637300af4184016195088b9b9,
         type: 3}
@@ -24767,6 +24787,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c50286cb604054491a801ada556bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabArcosAbiertos1: {fileID: 3542227037178400706, guid: f968c30e7f066934082abb4b9362b3e8,
+    type: 3}
+  prefabArcosAbiertos2: {fileID: 6027421669364353498, guid: 7d0c351ac46555c4488c8e0b7c1ef4a1,
+    type: 3}
+  prefabArcosAbiertos3: {fileID: 1132636390919648183, guid: a2a940b14660cc842b800055fd1410e6,
+    type: 3}
+  prefabArcosAbiertos4: {fileID: 3350602772286572934, guid: 95861e7a404147040b8dde191c79dbc6,
+    type: 3}
+  posicionesArcos1: {fileID: 4207298928522941816, guid: f968c30e7f066934082abb4b9362b3e8,
+    type: 3}
+  posicionesArcos2: {fileID: 6408170088129893216, guid: 7d0c351ac46555c4488c8e0b7c1ef4a1,
+    type: 3}
+  posicionesArcos3: {fileID: 359230684377803021, guid: a2a940b14660cc842b800055fd1410e6,
+    type: 3}
+  posicionesArcos4: {fileID: 2680886238669755196, guid: 95861e7a404147040b8dde191c79dbc6,
+    type: 3}
 --- !u!1 &1328279667 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7e7835eabbdde8f4bb442ba2c3c660dd,

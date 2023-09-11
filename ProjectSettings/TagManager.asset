@@ -13,6 +13,7 @@ TagManager:
   - Abonacion
   - SobreRegado
   - Regadera
+  - arcosCerrados
   layers:
   - Default
   - TransparentFX
