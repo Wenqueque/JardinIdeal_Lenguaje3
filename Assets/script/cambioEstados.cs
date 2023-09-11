@@ -26,7 +26,7 @@ public class cambioEstados : MonoBehaviour
     public GameObject prefabSobreRegar;
 
     public EstadoPlanta estadoInicial; // Estado inicial de la planta
-    private EstadoPlanta estadoActual; // Estado actual de la planta
+    public EstadoPlanta estadoActual; // Estado actual de la planta
 
     private GameObject plantaActual; // Referencia al prefab activo actualmente
 
@@ -209,7 +209,7 @@ private IEnumerator PermitirInteraccionDespuesDeEspera()
         estadoActualIndexFuente = nuevoEstadoIndexFuente;
     }
 
-    private void CambiarEstado(EstadoPlanta nuevoEstado)
+    public void CambiarEstado(EstadoPlanta nuevoEstado)
     {
         estadoActual = nuevoEstado;
 
