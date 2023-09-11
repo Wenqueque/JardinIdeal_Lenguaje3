@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class cambioEstados : MonoBehaviour
+public class EstadosArea2 : MonoBehaviour
 {
     //fuente--------
     public List<GameObject> estadosFuente; // Lista de estados del objeto fuente
@@ -20,6 +20,10 @@ public class cambioEstados : MonoBehaviour
     public int limiteInteraccionesFuente = 6; //Esto cambia segun con cuantas plantas interactuamos
     //fuente-------
 
+    private bool estaMirandoFuente = false; // Variable para verificar si el jugador está mirando un objeto con el tag "Fuente"
+    public float radioDeteccionFuente = 1.0f; // Radio de detección de la esfera de colisión
+    private bool estaColisionandoConFuente = false; // Agrega esta variable de instancia
+
     public GameObject prefabAbonar;
     public GameObject prefabBien;
     public GameObject prefabNecesitaRegar;
@@ -34,7 +38,7 @@ public class cambioEstados : MonoBehaviour
     private bool _isGazedAt = false;
 
     //CONTADOR DE REGAR ENTRE TODOS LOS OBJETOS
-    private static int vecesRegadas = 1;
+    private static int vecesRegadas = 0;
 
     //ESTADOS DE PLANTA
     public enum EstadoPlanta
@@ -88,16 +92,15 @@ public class cambioEstados : MonoBehaviour
             CambiarEstado(EstadoPlanta.NecesitaRegar); // Cambia a "NecesitaRegar"
         }
 
-        //Verifica si se llegÃ³ al lÃ­mite de interacciones con la fuente y vecesRegadas es igual a 1
-        if (interaccionesConFuente >= limiteInteraccionesFuente && vecesRegadas == 1)
-            {
-                // Reinicia los parÃ¡metros apropiados aquÃ­
-                //interaccionesConFuente = 0;
-                cambioFinalizadoFuente = false;
-                estadoActual = estadoInicial;
-
-            AudioManagerSingleton.Instance.PlaySound(2); // 0 es el Ã­ndice del sonido que deseas reproducir
-                // TambiÃ©n puedes reiniciar otros parÃ¡metros si es necesario
+        // Verifica si se llegó al límite de interacciones con la fuente y vecesRegadas es igual a 1
+        if (interaccionesConFuente >= limiteInteraccionesFuente)
+        {
+            // Reinicia los parámetros apropiados aquí
+            interaccionesConFuente = 0;
+            cambioFinalizadoFuente = false;
+            estadoActual = estadoInicial;
+            AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
+            // También puedes reiniciar otros parámetros si es necesario
         }
 
         if (_isGazedAt && Input.GetAxis("Abonar") > 0 && estadoActual == EstadoPlanta.Abonar)
@@ -106,7 +109,7 @@ public class cambioEstados : MonoBehaviour
             // Realiza acciones para el estado de Abonar
             Debug.Log("Abonando la planta");
             CambiarEstado(EstadoPlanta.Bien);
-            AudioManagerSingleton.Instance.PlaySound(2); // 0 es el Ã­ndice del sonido que deseas reproducir
+            AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
         }
         //else if (_isGazedAt && Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //JOYSTICK
         else if (_isGazedAt && Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //TECLADO
@@ -115,7 +118,7 @@ public class cambioEstados : MonoBehaviour
             Debug.Log("Regando la planta");
             CambiarEstado(EstadoPlanta.Bien);
             vecesRegadas++; // Incrementa el contador de riegos
-            AudioManagerSingleton.Instance.PlaySound(1); // 0 es el Ã­ndice del sonido que deseas reproducir
+            AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
         }
         //else if (_isGazedAt && Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //JOYSTICK
         else if (_isGazedAt && Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //TECLADO
@@ -124,80 +127,69 @@ public class cambioEstados : MonoBehaviour
             Debug.Log("SobreRegando la planta");
             CambiarEstado(EstadoPlanta.SobreRegar);
             vecesRegadas++; // Incrementa el contador de riegos
-            AudioManagerSingleton.Instance.PlaySound(1); // 0 es el Ã­ndice del sonido que deseas reproducir
+            AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
         }
 
-        //if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetAxis("Regar") > 0)
-        if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetKeyDown(KeyCode.R))
+        // Obtener la posición y la dirección de la mirada del jugador
+        Vector3 posicionCamara = Camera.main.transform.position;
+        Vector3 miradaDireccion = Camera.main.transform.forward;
+
+        // Lanzar una esfera de colisión en la dirección de la mirada para verificar objetos con el tag "Fuente"
+        Collider[] colliders = Physics.OverlapSphere(posicionCamara, radioDeteccionFuente);
+
+        estaMirandoFuente = false;
+
+        foreach (Collider collider in colliders)
         {
-            if (puedeInteractuarFuente)
+            if (collider.CompareTag("Fuente"))
             {
-                Collider[] colliders = GetComponentsInChildren<Collider>(); // ObtÃ©n los colliders de los objetos hijos del puntero
-
-                foreach (Collider collider in colliders)
-                {
-                    if (collider.CompareTag("Fuente"))
-                    {
-                        if (interaccionesConFuente < limiteInteraccionesFuente)
-                        {
-                            // Realiza las acciones de interacciÃ³n con la fuente aquÃ­
-
-                            // DespuÃ©s de la interacciÃ³n, espera un tiempo antes de permitir otra interacciÃ³n
-                            puedeInteractuarFuente = false;
-                            StartCoroutine(PermitirInteraccionDespuesDeEspera());
-
-                            CambiarEstadoFuente((estadoActualIndexFuente + 1) % estadosFuente.Count);
-
-                            // Verifica si hemos llegado al quinto estado y marcamos el cambio como finalizado
-                            if (estadoActualIndexFuente == 6) // Cambiado de 5 a 4, ya que los Ã­ndices comienzan desde 0
-                            {
-                                cambioFinalizadoFuente = true;
-                            }
-
-                            Debug.Log("Clic en objeto con tag 'Fuente'");
-                            interaccionesConFuente++; // Incrementa el contador de interacciones
-
-                            vecesRegadas = 0; // Reinicia el contador de riegos
-                            AudioManagerSingleton.Instance.PlaySound(2); // 0 es el Ã­ndice del sonido que deseas reproducir
-
-                            // Puedes desactivar el collider del objeto puntero invisible para evitar mÃºltiples interacciones
-                            collider.enabled = false;
-
-                            break; // Sal del bucle, ya que hemos encontrado una colisiÃ³n
-                        }
-                        if (interaccionesConFuente >= limiteInteraccionesFuente)
-                        {
-                            // Si llegamos al lÃ­mite, desactivamos la interacciÃ³n con la fuente
-                            Debug.Log("LÃ­mite de interacciones con la fuente alcanzado.");
-                            puedeInteractuarFuente = false;
-                        }
-                        else
-                        {
-                            Debug.Log("LÃ­mite de interacciones con la fuente alcanzado.");
-                            AudioManagerSingleton.Instance.PlaySound(6); // 0 es el Ã­ndice del sonido que deseas reproducir
-                        }
-                    }
-                }
+                estaMirandoFuente = true;
+                break; // Salir del bucle si se encuentra una fuente
             }
         }
 
+        //if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetAxis("Regar") > 0)
+        // Si el jugador presiona la tecla "R" y está colisionando con un objeto que tiene el tag "Fuente"
+        if (Input.GetKeyDown(KeyCode.R) && estaMirandoFuente)
+        {
+            if (puedeInteractuarFuente)
+            {
+                // Realiza las acciones de interacción con la fuente aquí
+
+                // Después de la interacción, espera un tiempo antes de permitir otra interacción
+                puedeInteractuarFuente = false;
+                StartCoroutine(PermitirInteraccionDespuesDeEspera());
+
+                CambiarEstadoFuente((estadoActualIndexFuente + 1) % estadosFuente.Count);
+
+                // Verifica si hemos llegado al último estado y marcamos el cambio como finalizado
+                if (estadoActualIndexFuente == 4) // Índice del último estado
+                {
+                    cambioFinalizadoFuente = true;
+                }
+
+                Debug.Log("Interacción con la fuente");
+                interaccionesConFuente++; // Incrementa el contador de interacciones
+
+                vecesRegadas = 0; // Reinicia el contador de riegos
+                AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
+            }
+        }
     }
 
-    // Este mÃ©todo se llama cuando el objeto estÃ¡ siendo mirado.
+    // Este método se llama cuando el objeto está siendo mirado.
     public void OnPointerEnter()
     {
         _isGazedAt = true;
         isGazedAtFuente = true;
     }
 
-    // Este mÃ©todo se llama cuando el objeto ya no estÃ¡ siendo mirado.
+    // Este método se llama cuando el objeto ya no está siendo mirado.
     public void OnPointerExit()
     {
         _isGazedAt = false;
         isGazedAtFuente = false;
     }
-
-    
 
     private void CambiarEstadoFuente(int nuevoEstadoIndexFuente)
     {
@@ -250,10 +242,28 @@ public class cambioEstados : MonoBehaviour
             tiempoEnEstadoBien = 0f; // Reinicia el temporizador al entrar en el estado "Bien"
         }
 
-        // Si el jugador ha regado tres veces en total, desactiva la funciÃ³n de riego
+        // Si el jugador ha regado tres veces en total, desactiva la función de riego
         if (vecesRegadas >= 1)
         {
             _isGazedAt = false;
- Â Â Â Â Â Â Â }
-Â Â Â Â }
+        }
+
+    }
+    // Este método se llama cuando colisionas con un objeto que tiene el tag "Fuente".
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Fuente"))
+        {
+            estaColisionandoConFuente = true;
+        }
+    }
+
+    // Este método se llama cuando dejas de colisionar con un objeto que tiene el tag "Fuente".
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Fuente"))
+        {
+            estaColisionandoConFuente = false;
+        }
+    }
 }

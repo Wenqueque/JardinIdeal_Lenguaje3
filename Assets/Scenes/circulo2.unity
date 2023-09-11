@@ -743,12 +743,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3e4ba8eeee4cfa54aad2c952f7c3cc26,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.999142
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e4ba8eeee4cfa54aad2c952f7c3cc26,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.9550958
+      value: 6.32
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e4ba8eeee4cfa54aad2c952f7c3cc26,
         type: 3}
@@ -1364,6 +1364,7 @@ GameObject:
   - component: {fileID: 73922977}
   - component: {fileID: 73922976}
   - component: {fileID: 73922975}
+  - component: {fileID: 73922979}
   m_Layer: 6
   m_Name: arbustoArbol (2)
   m_TagString: Regadera
@@ -1420,7 +1421,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73922974}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61fe87ba74aa75f44a23aa3effd5c437, type: 3}
   m_Name: 
@@ -1458,6 +1459,33 @@ Transform:
   - {fileID: 39891223}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &73922979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73922974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68900640847b0f64da3c7e5a4958b630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  estadosFuente:
+  - {fileID: 418950020}
+  SonidoFuente: {fileID: 0}
+  tiempoEsperaInteraccion: 1
+  interaccionesConFuente: 0
+  limiteInteraccionesFuente: 6
+  radioDeteccionFuente: 1
+  prefabAbonar: {fileID: 958332291}
+  prefabBien: {fileID: 420765779}
+  prefabNecesitaRegar: {fileID: 237652205}
+  prefabSobreRegar: {fileID: 39891220}
+  estadoInicial: 2
+  estadoActual: 2
+  tiempoEnEstadoBien: 0
+  tiempoParaCambioBien: 50
 --- !u!1 &79008384 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a783dbd227015314cb85a58a67121eb8,
@@ -6003,6 +6031,7 @@ GameObject:
   - component: {fileID: 245309131}
   - component: {fileID: 245309130}
   - component: {fileID: 245309129}
+  - component: {fileID: 245309135}
   m_Layer: 6
   m_Name: floresNaranjas
   m_TagString: Regadera
@@ -6101,7 +6130,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 245309128}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61fe87ba74aa75f44a23aa3effd5c437, type: 3}
   m_Name: 
@@ -6138,6 +6167,33 @@ Transform:
   - {fileID: 1746239168}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -92.885, z: 0}
+--- !u!114 &245309135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245309128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68900640847b0f64da3c7e5a4958b630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  estadosFuente:
+  - {fileID: 418950020}
+  SonidoFuente: {fileID: 0}
+  tiempoEsperaInteraccion: 1
+  interaccionesConFuente: 0
+  limiteInteraccionesFuente: 6
+  radioDeteccionFuente: 1
+  prefabAbonar: {fileID: 0}
+  prefabBien: {fileID: 1872196673}
+  prefabNecesitaRegar: {fileID: 2046654661}
+  prefabSobreRegar: {fileID: 1746239167}
+  estadoInicial: 2
+  estadoActual: 2
+  tiempoEnEstadoBien: 0
+  tiempoParaCambioBien: 50
 --- !u!1001 &245402543
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7966,6 +8022,7 @@ GameObject:
   - component: {fileID: 349467700}
   - component: {fileID: 349467699}
   - component: {fileID: 349467698}
+  - component: {fileID: 349467703}
   m_Layer: 6
   m_Name: Estados de Fuente
   m_TagString: Fuente
@@ -8156,7 +8213,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349467696}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61fe87ba74aa75f44a23aa3effd5c437, type: 3}
   m_Name: 
@@ -8179,6 +8236,32 @@ MonoBehaviour:
   prefabSobreRegar: {fileID: 0}
   estadoInicial: 4
   estadoActual: 0
+  tiempoEnEstadoBien: 0
+  tiempoParaCambioBien: 50
+--- !u!114 &349467703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349467696}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68900640847b0f64da3c7e5a4958b630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  estadosFuente: []
+  SonidoFuente: {fileID: 0}
+  tiempoEsperaInteraccion: 1
+  interaccionesConFuente: 0
+  limiteInteraccionesFuente: 6
+  radioDeteccionFuente: 1
+  prefabAbonar: {fileID: 0}
+  prefabBien: {fileID: 0}
+  prefabNecesitaRegar: {fileID: 0}
+  prefabSobreRegar: {fileID: 0}
+  estadoInicial: 0
+  estadoActual: 2
   tiempoEnEstadoBien: 0
   tiempoParaCambioBien: 50
 --- !u!1 &350434517 stripped
@@ -10647,7 +10730,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &418950021
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16872,6 +16955,7 @@ GameObject:
   - component: {fileID: 584836580}
   - component: {fileID: 584836579}
   - component: {fileID: 584836578}
+  - component: {fileID: 584836584}
   m_Layer: 6
   m_Name: flores
   m_TagString: Regadera
@@ -16970,7 +17054,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 584836577}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61fe87ba74aa75f44a23aa3effd5c437, type: 3}
   m_Name: 
@@ -17007,6 +17091,33 @@ Transform:
   - {fileID: 1777779192}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 49.727, z: 0}
+--- !u!114 &584836584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584836577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68900640847b0f64da3c7e5a4958b630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  estadosFuente:
+  - {fileID: 418950020}
+  SonidoFuente: {fileID: 0}
+  tiempoEsperaInteraccion: 1
+  interaccionesConFuente: 0
+  limiteInteraccionesFuente: 6
+  radioDeteccionFuente: 1
+  prefabAbonar: {fileID: 0}
+  prefabBien: {fileID: 212444207}
+  prefabNecesitaRegar: {fileID: 165641902}
+  prefabSobreRegar: {fileID: 1777779191}
+  estadoInicial: 2
+  estadoActual: 2
+  tiempoEnEstadoBien: 0
+  tiempoParaCambioBien: 50
 --- !u!1001 &585859804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27237,6 +27348,7 @@ GameObject:
   - component: {fileID: 888543454}
   - component: {fileID: 888543453}
   - component: {fileID: 888543452}
+  - component: {fileID: 888543458}
   m_Layer: 6
   m_Name: floresVioletas
   m_TagString: Regadera
@@ -27335,7 +27447,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 888543451}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61fe87ba74aa75f44a23aa3effd5c437, type: 3}
   m_Name: 
@@ -27372,6 +27484,33 @@ Transform:
   - {fileID: 508889382}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -53.68, z: 0}
+--- !u!114 &888543458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888543451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68900640847b0f64da3c7e5a4958b630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  estadosFuente:
+  - {fileID: 418950020}
+  SonidoFuente: {fileID: 0}
+  tiempoEsperaInteraccion: 1
+  interaccionesConFuente: 0
+  limiteInteraccionesFuente: 6
+  radioDeteccionFuente: 1
+  prefabAbonar: {fileID: 0}
+  prefabBien: {fileID: 155881195}
+  prefabNecesitaRegar: {fileID: 935834515}
+  prefabSobreRegar: {fileID: 508889381}
+  estadoInicial: 2
+  estadoActual: 2
+  tiempoEnEstadoBien: 0
+  tiempoParaCambioBien: 50
 --- !u!1001 &890687134
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29916,11 +30055,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 953201959}
+  - component: {fileID: 953201955}
   - component: {fileID: 953201958}
   - component: {fileID: 953201957}
   - component: {fileID: 953201956}
-  - component: {fileID: 953201955}
   - component: {fileID: 953201954}
+  - component: {fileID: 953201960}
   m_Layer: 6
   m_Name: margaritas
   m_TagString: Regadera
@@ -29956,7 +30096,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953201953}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61fe87ba74aa75f44a23aa3effd5c437, type: 3}
   m_Name: 
@@ -30056,6 +30196,33 @@ Transform:
   - {fileID: 1053334627}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 24.307, z: 0}
+--- !u!114 &953201960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953201953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68900640847b0f64da3c7e5a4958b630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  estadosFuente:
+  - {fileID: 418950020}
+  SonidoFuente: {fileID: 0}
+  tiempoEsperaInteraccion: 1
+  interaccionesConFuente: 0
+  limiteInteraccionesFuente: 6
+  radioDeteccionFuente: 1
+  prefabAbonar: {fileID: 0}
+  prefabBien: {fileID: 555754865}
+  prefabNecesitaRegar: {fileID: 467173423}
+  prefabSobreRegar: {fileID: 1053334626}
+  estadoInicial: 2
+  estadoActual: 2
+  tiempoEnEstadoBien: 0
+  tiempoParaCambioBien: 50
 --- !u!1001 &955519250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42106,6 +42273,7 @@ GameObject:
   - component: {fileID: 1366181694}
   - component: {fileID: 1366181693}
   - component: {fileID: 1366181692}
+  - component: {fileID: 1366181696}
   m_Layer: 6
   m_Name: arbustoArbol (1)
   m_TagString: Regadera
@@ -42162,7 +42330,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1366181691}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61fe87ba74aa75f44a23aa3effd5c437, type: 3}
   m_Name: 
@@ -42200,6 +42368,33 @@ Transform:
   - {fileID: 437545579}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 27.563, z: 0}
+--- !u!114 &1366181696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366181691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68900640847b0f64da3c7e5a4958b630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  estadosFuente:
+  - {fileID: 418950020}
+  SonidoFuente: {fileID: 0}
+  tiempoEsperaInteraccion: 1
+  interaccionesConFuente: 0
+  limiteInteraccionesFuente: 6
+  radioDeteccionFuente: 1
+  prefabAbonar: {fileID: 895180219}
+  prefabBien: {fileID: 1696621701}
+  prefabNecesitaRegar: {fileID: 2138073647}
+  prefabSobreRegar: {fileID: 437545576}
+  estadoInicial: 2
+  estadoActual: 2
+  tiempoEnEstadoBien: 0
+  tiempoParaCambioBien: 50
 --- !u!1 &1374501063 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a783dbd227015314cb85a58a67121eb8,
@@ -56813,27 +57008,27 @@ SceneRoots:
   - {fileID: 2015879729}
   - {fileID: 532191445}
   - {fileID: 674539957}
-  - {fileID: 965735937}
   - {fileID: 926470472}
-  - {fileID: 980426562}
+  - {fileID: 547953388}
+  - {fileID: 532632277}
   - {fileID: 495058977}
+  - {fileID: 980426562}
+  - {fileID: 965735937}
   - {fileID: 1317718385}
   - {fileID: 880901583}
   - {fileID: 848590239}
   - {fileID: 1680071221}
   - {fileID: 92681838}
   - {fileID: 535271639}
-  - {fileID: 73922978}
   - {fileID: 1216888303}
   - {fileID: 2086165078}
+  - {fileID: 1366181695}
+  - {fileID: 73922978}
   - {fileID: 953201959}
-  - {fileID: 532632277}
   - {fileID: 584836583}
   - {fileID: 888543457}
   - {fileID: 245309134}
   - {fileID: 349467697}
-  - {fileID: 1366181695}
-  - {fileID: 547953388}
   - {fileID: 1150195773}
   - {fileID: 744069189}
   - {fileID: 223904373}
