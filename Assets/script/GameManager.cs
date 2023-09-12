@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
 
             // Marcar que los arcos ya se instanciaron
             arcosYaInstanciados1 = true;
+            AudioManagerSingleton.Instance.PlaySound(8); // 0 es el índice del sonido que deseas 
             //ganar = true;
         }
 
@@ -123,6 +124,7 @@ public class GameManager : MonoBehaviour
 
             // Marcar que los arcos ya se instanciaron
             arcosYaInstanciados2 = true;
+            AudioManagerSingleton.Instance.PlaySound(8); // 0 es el índice del sonido que deseas 
             //ganar = true;
         }
     }

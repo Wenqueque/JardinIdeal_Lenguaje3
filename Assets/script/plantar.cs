@@ -50,9 +50,11 @@ public class plantar : MonoBehaviour
                 if (SonidoAbono != null)
                 {
                     SonidoAbono.Play();
+                    AudioManagerSingleton.Instance.PlaySound(3); // 0 es el índice del sonido que deseas reproducir
                 }
+                AudioManagerSingleton.Instance.PlaySound(3); // 0 es el índice del sonido que deseas reproducir
             }
-           
+
         }
     }
 

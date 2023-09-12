@@ -37,6 +37,13 @@ public class ObjectsManagerLlamado : MonoBehaviour
             }
 
             // Si el rayo golpea un objeto con la etiqueta "Abonar", establecemos seVeAbonar a true.
+            if (hit.collider.CompareTag("maleza"))
+            {
+                //Debug.Log("MOSTRANDO ABONO");
+                seVeTijeras = true;
+            }
+
+            // Si el rayo golpea un objeto con la etiqueta "Abonar", establecemos seVeAbonar a true.
             if (hit.collider.CompareTag("Fruta"))
             {
                 //Debug.Log("MOSTRANDO ABONO");

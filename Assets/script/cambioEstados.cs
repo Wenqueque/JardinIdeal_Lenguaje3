@@ -96,7 +96,7 @@ public class cambioEstados : MonoBehaviour
                 cambioFinalizadoFuente = false;
                 estadoActual = estadoInicial;
 
-            AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
+                AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
                 // También puedes reiniciar otros parámetros si es necesario
         }
 
@@ -106,7 +106,7 @@ public class cambioEstados : MonoBehaviour
             // Realiza acciones para el estado de Abonar
             Debug.Log("Abonando la planta");
             CambiarEstado(EstadoPlanta.Bien);
-            AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
+            AudioManagerSingleton.Instance.PlaySound(3); // 0 es el índice del sonido que deseas reproducir
         }
         //else if (_isGazedAt && Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //JOYSTICK
         else if (_isGazedAt && Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //TECLADO
@@ -115,7 +115,7 @@ public class cambioEstados : MonoBehaviour
             Debug.Log("Regando la planta");
             CambiarEstado(EstadoPlanta.Bien);
             vecesRegadas++; // Incrementa el contador de riegos
-            AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
+            AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
         }
         //else if (_isGazedAt && Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //JOYSTICK
         else if (_isGazedAt && Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //TECLADO
@@ -124,7 +124,7 @@ public class cambioEstados : MonoBehaviour
             Debug.Log("SobreRegando la planta");
             CambiarEstado(EstadoPlanta.SobreRegar);
             vecesRegadas++; // Incrementa el contador de riegos
-            AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
+            AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
         }
 
         //if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetAxis("Regar") > 0)
@@ -158,7 +158,7 @@ public class cambioEstados : MonoBehaviour
                             interaccionesConFuente++; // Incrementa el contador de interacciones
 
                             vecesRegadas = 0; // Reinicia el contador de riegos
-                            AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
+                            AudioManagerSingleton.Instance.PlaySound(0); // 0 es el índice del sonido que deseas reproducir
 
                             // Puedes desactivar el collider del objeto puntero invisible para evitar múltiples interacciones
                             collider.enabled = false;
@@ -170,11 +170,12 @@ public class cambioEstados : MonoBehaviour
                             // Si llegamos al límite, desactivamos la interacción con la fuente
                             Debug.Log("Límite de interacciones con la fuente alcanzado.");
                             puedeInteractuarFuente = false;
+                            AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
                         }
                         else
                         {
                             Debug.Log("Límite de interacciones con la fuente alcanzado.");
-                            AudioManagerSingleton.Instance.PlaySound(6); // 0 es el índice del sonido que deseas reproducir
+                            AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
                         }
                     }
                 }

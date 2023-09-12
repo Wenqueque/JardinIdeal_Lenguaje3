@@ -63,9 +63,11 @@ public class Maleza : MonoBehaviour
                 if (SonidoAbono != null)
                 {
                     SonidoAbono.Play();
+                    AudioManagerSingleton.Instance.PlaySound(4); // 0 es el índice del sonido que deseas 
                 }
+                AudioManagerSingleton.Instance.PlaySound(4); // 0 es el índice del sonido que deseas 
             }
-           
+
         }
     }
 

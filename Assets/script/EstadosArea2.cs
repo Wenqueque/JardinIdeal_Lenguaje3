@@ -99,7 +99,7 @@ public class EstadosArea2 : MonoBehaviour
             interaccionesConFuente = 0;
             cambioFinalizadoFuente = false;
             estadoActual = estadoInicial;
-            AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
+            AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
         }
         //if (_isGazedAt && Input.GetAxis("Abonar") > 0 && estadoActual == EstadoPlanta.Abonar) //JOYSTICK
         if (_isGazedAt && Input.GetKeyDown(KeyCode.B) && estadoActual == EstadoPlanta.Abonar) //TECLADO
@@ -107,7 +107,7 @@ public class EstadosArea2 : MonoBehaviour
             // Realiza acciones para el estado de Abonar
             Debug.Log("Abonando la planta");
             CambiarEstado(EstadoPlanta.Bien);
-            AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
+            AudioManagerSingleton.Instance.PlaySound(3); // 0 es el índice del sonido que deseas reproducir
         }
         //else if (_isGazedAt && Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //JOYSTICK
         else if (_isGazedAt && Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //TECLADO
@@ -116,7 +116,7 @@ public class EstadosArea2 : MonoBehaviour
             Debug.Log("Regando la planta");
             CambiarEstado(EstadoPlanta.Bien);
             vecesRegadas++; // Incrementa el contador de riegos
-            AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
+            AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
         }
         //else if (_isGazedAt && Input.GetAxis("Regar") > 0 && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //JOYSTICK
         else if (_isGazedAt && Input.GetKeyDown(KeyCode.R) && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //TECLADO
@@ -125,7 +125,7 @@ public class EstadosArea2 : MonoBehaviour
             Debug.Log("SobreRegando la planta");
             CambiarEstado(EstadoPlanta.SobreRegar);
             vecesRegadas++; // Incrementa el contador de riegos
-            AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
+            AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
         }
 
         // Obtener la posición y la dirección de la mirada del jugador
@@ -171,7 +171,7 @@ public class EstadosArea2 : MonoBehaviour
                 interaccionesConFuente++; // Incrementa el contador de interacciones
 
                 vecesRegadas = 0; // Reinicia el contador de riegos
-                AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
+                AudioManagerSingleton.Instance.PlaySound(0); // 0 es el índice del sonido que deseas reproducir
             }
         }
     }

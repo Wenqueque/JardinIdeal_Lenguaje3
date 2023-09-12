@@ -63,9 +63,12 @@ public class abonoNivel2 : MonoBehaviour
                 if (SonidoAbono != null)
                 {
                     SonidoAbono.Play();
+                    AudioManagerSingleton.Instance.PlaySound(3); // 0 es el índice del sonido que deseas 
                 }
+                AudioManagerSingleton.Instance.PlaySound(3); // 0 es el índice del sonido que deseas 
+
             }
-           
+
         }
     }
 

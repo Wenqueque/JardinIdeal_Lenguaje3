@@ -23,6 +23,7 @@ public class EstadosBalanzas : MonoBehaviour
             // Desactiva el objeto1 y activa el objeto2
             objeto1.SetActive(false);
             objeto2.SetActive(true);
+            AudioManagerSingleton.Instance.PlaySound(9); // 0 es el índice del sonido que deseas 
         }
     }
 }

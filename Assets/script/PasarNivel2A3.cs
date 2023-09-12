@@ -11,7 +11,7 @@ public class PasarNivel2A3 : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player")) // Puedes cambiar "Player" por la etiqueta del objeto con el que quieres colisionar.
         {
-            SceneManager.LoadScene("SampleScene"); // Carga la escena del tercer nivel
+            SceneManager.LoadScene("circulo3"); // Carga la escena del tercer nivel
         }
     }
 }

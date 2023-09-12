@@ -34,27 +34,27 @@ private void Start()
 
     void Update()
     {
-       // Buscar objetos con la etiqueta "bien" en la escena
-    GameObject[] objetosBien = GameObject.FindGameObjectsWithTag("bien");
+        // Buscar objetos con la etiqueta "bien" en la escena
+        GameObject[] objetosBien = GameObject.FindGameObjectsWithTag("bien");
     
-    if (objetosBien.Length >= 6 && !arcosYaInstanciados)
-    {
-        // Desactivar objetos con el tag "arcosCerrados"
-        GameObject[] arcosCerrados = GameObject.FindGameObjectsWithTag("arcosCerrados");
-        foreach (GameObject arco in arcosCerrados)
+        if (objetosBien.Length >= 6 && !arcosYaInstanciados)
         {
-            arco.SetActive(false);
-        }
+            // Desactivar objetos con el tag "arcosCerrados"
+            GameObject[] arcosCerrados = GameObject.FindGameObjectsWithTag("arcosCerrados");
+            foreach (GameObject arco in arcosCerrados)
+            {
+                arco.SetActive(false);
+            }
 
-        // Instanciar 4 nuevos objetos con el prefab de arcos abiertos en posiciones y rotaciones específicas
-        Instantiate(prefabArcosAbiertos1, posicionesArcos1.position, Quaternion.Euler(posicionesArcos1.rotation.eulerAngles));
-        Instantiate(prefabArcosAbiertos2, posicionesArcos2.position, Quaternion.Euler(posicionesArcos2.rotation.eulerAngles));
-        Instantiate(prefabArcosAbiertos3, posicionesArcos3.position, Quaternion.Euler(posicionesArcos3.rotation.eulerAngles));
-        Instantiate(prefabArcosAbiertos4, posicionesArcos4.position, Quaternion.Euler(posicionesArcos4.rotation.eulerAngles));
+            // Instanciar 4 nuevos objetos con el prefab de arcos abiertos en posiciones y rotaciones específicas
+            Instantiate(prefabArcosAbiertos1, posicionesArcos1.position, Quaternion.Euler(posicionesArcos1.rotation.eulerAngles));
+            Instantiate(prefabArcosAbiertos2, posicionesArcos2.position, Quaternion.Euler(posicionesArcos2.rotation.eulerAngles));
+            Instantiate(prefabArcosAbiertos3, posicionesArcos3.position, Quaternion.Euler(posicionesArcos3.rotation.eulerAngles));
+            Instantiate(prefabArcosAbiertos4, posicionesArcos4.position, Quaternion.Euler(posicionesArcos4.rotation.eulerAngles));
         
-        // Marcar que los arcos ya se instanciaron
-        arcosYaInstanciados = true;
-    }
+            //  Marcar que los arcos ya se instanciaron
+            arcosYaInstanciados = true;
+        }
 
 
         // Buscar objetos con las etiquetas "Marchito" o "SobreRegado" en la escena

@@ -63,7 +63,9 @@ public class CambioEstadoFruta : MonoBehaviour
                 if (SonidoFruta != null)
                 {
                     SonidoFruta.Play();
+                    AudioManagerSingleton.Instance.PlaySound(5); // 0 es el índice del sonido que deseas 
                 }
+                AudioManagerSingleton.Instance.PlaySound(5); // 0 es el índice del sonido que deseas 
             }
         }
     }
