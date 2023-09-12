@@ -100,8 +100,8 @@ public class cambioEstados : MonoBehaviour
                 // También puedes reiniciar otros parámetros si es necesario
         }
 
-        if (_isGazedAt && Input.GetAxis("Abonar") > 0 && estadoActual == EstadoPlanta.Abonar)
-        //if (_isGazedAt && Input.GetKeyDown(KeyCode.B) && estadoActual == EstadoPlanta.Abonar)
+        //if (_isGazedAt && Input.GetAxis("Abonar") > 0 && estadoActual == EstadoPlanta.Abonar)
+        if (_isGazedAt && Input.GetKeyDown(KeyCode.B) && estadoActual == EstadoPlanta.Abonar)
         {
             // Realiza acciones para el estado de Abonar
             Debug.Log("Abonando la planta");

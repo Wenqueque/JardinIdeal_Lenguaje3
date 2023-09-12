@@ -148,6 +148,7 @@ public class EstadosArea2 : MonoBehaviour
 
         //if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetAxis("Regar") > 0)
         // Si el jugador presiona la tecla "R" y está colisionando con un objeto que tiene el tag "Fuente"
+        //if (Input.GetAxis("Regar") > 0 && estaMirandoFuente)
         if (Input.GetKeyDown(KeyCode.R) && estaMirandoFuente)
         {
             if (puedeInteractuarFuente)
