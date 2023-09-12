@@ -30,7 +30,7 @@ public class abonoNivel2 : MonoBehaviour
     }
 
     public float tiempoEnEstadoBien = 0f; // Tiempo en el estado "Bien"
-    public float tiempoParaCambioBien = 10f; // Tiempo para cambiar del estado "Bien" a "abonar"
+    public float tiempoParaCambioBien = 70f; // Tiempo para cambiar del estado "Bien" a "abonar"
 
     private void Start()
     {

@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: dc76dbc4caaabe84081b3a643cc40326,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.82
+      value: -38.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dc76dbc4caaabe84081b3a643cc40326,
         type: 3}
@@ -72,7 +72,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7954a8a50251682418e439a932de3981, type: 2}
+      objectReference: {fileID: 2100000, guid: 3b944114c82d034418b6c16488d7b54b, type: 2}
     - target: {fileID: -516098083770646512, guid: dc76dbc4caaabe84081b3a643cc40326,
         type: 3}
       propertyPath: m_Layer
@@ -81,7 +81,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dc76dbc4caaabe84081b3a643cc40326,
         type: 3}
       propertyPath: m_Name
-      value: arco-abierto3
+      value: arco-abierto3A2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: dc76dbc4caaabe84081b3a643cc40326,
         type: 3}
