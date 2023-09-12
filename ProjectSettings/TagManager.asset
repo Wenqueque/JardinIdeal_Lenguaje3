@@ -15,6 +15,7 @@ TagManager:
   - Regadera
   - arcosCerrados
   - arcosAbiertos
+  - fuenteVacia
   layers:
   - Default
   - TransparentFX

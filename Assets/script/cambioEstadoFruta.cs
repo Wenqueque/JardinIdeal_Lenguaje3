@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CambioEstadoFruta : MonoBehaviour
 {
-    public GameObject prefabAbonar;
     public GameObject prefabBien;
     public GameObject prefabRecogerFruta;
 
@@ -26,7 +25,6 @@ public class CambioEstadoFruta : MonoBehaviour
 
     public enum EstadoPlanta
     {
-        Abonar,
         Bien,
         RecogerFruta
     }
@@ -53,22 +51,11 @@ public class CambioEstadoFruta : MonoBehaviour
             }
         }
 
-        // Detecta la interacción del jugador y cambia el estado solo si el puntero está mirando el objeto
+        // Detecta la interacciï¿½n del jugador y cambia el estado solo si el puntero estï¿½ mirando el objeto
         if (_isGazedAt)
         {
-            //if (Input.GetAxis("Abonar") > 0 && estadoActual == EstadoPlanta.Abonar)
-            if (Input.GetKeyDown(KeyCode.B) && estadoActual == EstadoPlanta.Abonar)
-            {
-                // Realiza acciones para el estado de Abonar
-                Debug.Log("Abonando la planta");
-                CambiarEstado(EstadoPlanta.Bien);
-                if (SonidoAbono != null)
-                {
-                    SonidoAbono.Play();
-                }
-            }
-            //else if (Input.GetAxis("Fruta") > 0 && estadoActual == EstadoPlanta.RecogerFruta)
-            else if (Input.GetKeyDown(KeyCode.F) && estadoActual == EstadoPlanta.RecogerFruta)
+            // if (Input.GetAxis("Fruta") > 0 && estadoActual == EstadoPlanta.RecogerFruta)
+            if (Input.GetKeyDown(KeyCode.F) && estadoActual == EstadoPlanta.RecogerFruta)
             {
                 // Realiza acciones para el estado de NecesitaRegar
                 Debug.Log("Regando la planta");
@@ -81,13 +68,13 @@ public class CambioEstadoFruta : MonoBehaviour
         }
     }
 
-    // Este método se llama cuando el objeto está siendo mirado.
+    // Este mï¿½todo se llama cuando el objeto estï¿½ siendo mirado.
     public void OnPointerEnter()
     {
         _isGazedAt = true;
     }
 
-    // Este método se llama cuando el objeto ya no está siendo mirado.
+    // Este mï¿½todo se llama cuando el objeto ya no estï¿½ siendo mirado.
     public void OnPointerExit()
     {
         _isGazedAt = false;
@@ -105,9 +92,6 @@ public class CambioEstadoFruta : MonoBehaviour
 
         switch (estadoActual)
         {
-            case EstadoPlanta.Abonar:
-                plantaActual = prefabAbonar;
-                break;
             case EstadoPlanta.Bien:
                 plantaActual = prefabBien;
                 break;
