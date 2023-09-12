@@ -16,6 +16,8 @@ TagManager:
   - arcosCerrados
   - arcosAbiertos
   - fuenteVacia
+  - Fruta
+  - Semilla
   layers:
   - Default
   - TransparentFX
