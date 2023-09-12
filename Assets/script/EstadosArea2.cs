@@ -100,11 +100,9 @@ public class EstadosArea2 : MonoBehaviour
             cambioFinalizadoFuente = false;
             estadoActual = estadoInicial;
             AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
-            // También puedes reiniciar otros parámetros si es necesario
         }
-
-        if (_isGazedAt && Input.GetAxis("Abonar") > 0 && estadoActual == EstadoPlanta.Abonar)
-        //if (_isGazedAt && Input.GetKeyDown(KeyCode.B) && estadoActual == EstadoPlanta.Abonar)
+        //if (_isGazedAt && Input.GetAxis("Abonar") > 0 && estadoActual == EstadoPlanta.Abonar) //JOYSTICK
+        if (_isGazedAt && Input.GetKeyDown(KeyCode.B) && estadoActual == EstadoPlanta.Abonar) //TECLADO
         {
             // Realiza acciones para el estado de Abonar
             Debug.Log("Abonando la planta");
