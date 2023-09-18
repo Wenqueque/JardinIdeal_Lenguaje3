@@ -54,8 +54,8 @@ public class CambioEstadoFruta : MonoBehaviour
         // Detecta la interacci�n del jugador y cambia el estado solo si el puntero est� mirando el objeto
         if (_isGazedAt)
         {
-            // if (Input.GetAxis("Fruta") > 0 && estadoActual == EstadoPlanta.RecogerFruta)
-            if (Input.GetKeyDown(KeyCode.F) && estadoActual == EstadoPlanta.RecogerFruta)
+            if (Input.GetAxis("Fruta") > 0 && estadoActual == EstadoPlanta.RecogerFruta)
+            //if (Input.GetKeyDown(KeyCode.F) && estadoActual == EstadoPlanta.RecogerFruta)
             {
                 // Realiza acciones para el estado de NecesitaRegar
                 Debug.Log("Regando la planta");

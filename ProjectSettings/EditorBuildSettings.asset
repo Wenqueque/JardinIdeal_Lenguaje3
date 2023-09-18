@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/circulo2.unity
     guid: 5df2d74477eddc2468caf55fa49650cf
+  - enabled: 1
+    path: Assets/Scenes/circulo3.unity
+    guid: b066b068176663c488c6bc447eb46f51
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 421adecfa7e879d4bb5d1bb497b09fee,
       type: 2}
