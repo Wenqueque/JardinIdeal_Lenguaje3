@@ -127,8 +127,8 @@ public class cambioEstados : MonoBehaviour
             AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
         }
 
-        //if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetAxis("Regar") > 0)
-        if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetKeyDown(KeyCode.R))
+        //if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetAxis("Cortar") > 0)
+        if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetKeyDown(KeyCode.E))
         {
             if (puedeInteractuarFuente)
             {
