@@ -54,8 +54,8 @@ public class abonoNivel2 : MonoBehaviour
         // Detecta la interacci�n del jugador y cambia el estado solo si el puntero est� mirando el objeto
         if (_isGazedAt)
         {
-            if (Input.GetAxis("Abonar") > 0 && estadoActual == EstadoPlanta.Abonar)
-            //if (Input.GetKeyDown(KeyCode.B) && estadoActual == EstadoPlanta.Abonar)
+            //if (Input.GetAxis("Cortar") > 0 && estadoActual == EstadoPlanta.Abonar)
+            if (Input.GetKeyDown(KeyCode.E) && estadoActual == EstadoPlanta.Abonar)
             {
                 // Realiza acciones para el estado de Abonar
                 Debug.Log("Abonando la planta");
