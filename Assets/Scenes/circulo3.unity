@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.42
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.38821253, g: 0.4667289, b: 0.4753804, a: 0.42}
+  m_IndirectSpecularColor: {r: 0.38804772, g: 0.46658236, b: 0.47520256, a: 0.42}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -78207,6 +78207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ganar: 0
+  sceneToReset: 0
   prefabArcosAbiertos1A1: {fileID: 3542227037178400706, guid: f968c30e7f066934082abb4b9362b3e8,
     type: 3}
   prefabArcosAbiertos2A1: {fileID: 1132636390919648183, guid: a2a940b14660cc842b800055fd1410e6,

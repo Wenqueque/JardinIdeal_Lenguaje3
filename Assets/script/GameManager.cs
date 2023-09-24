@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public bool ganar = false;
+
+    // Variable para seleccionar la escena a reiniciar
+    public int sceneToReset = 0;
+
     // Start is called before the first frame update
     public GameObject prefabArcosAbiertos1A1; // Referencia al prefab de arcos abiertos
     public GameObject prefabArcosAbiertos2A1; // Referencia al prefab de arcos abiertos
@@ -41,22 +45,40 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("No se encontr� el script 'cambioEstados' en la escena.");
         }
-
-
     }
 
     private void Update()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         // Llamar a la función correspondiente para pasar al siguiente nivel
-        if (currentSceneIndex == 0) // Escena 1
+        if (currentSceneIndex == 1) // Escena 1
         {
             // Llama a la función para pasar al nivel 2
             pasarNivel2();
-        } else if (currentSceneIndex == 1) // Escena 2
+        }
+        else if (currentSceneIndex == 2) // Escena 2
         {
             // Llama a la función para pasar al nivel 3
             pasarNivel3();
+        }
+        // Verifica si la tecla "D" ha sido presionada y reinicia la escena seleccionada        
+        //if (Input.GetAxis("Reiniciar") > 0) //JOYSTICK--------------------------------
+        if (Input.GetKey(KeyCode.R))  //TECLADO
+        {
+            ResetSelectedScene();
+        }
+    }
+
+    // Función para reiniciar la escena seleccionada
+    private void ResetSelectedScene()
+    {
+        if (sceneToReset >= 0 && sceneToReset < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(sceneToReset);
+        }
+        else
+        {
+            Debug.LogError("Escena seleccionada no válida.");
         }
     }
 
