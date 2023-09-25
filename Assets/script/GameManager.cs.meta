@@ -3,7 +3,23 @@ guid: 2bdf9965d3893d74c8a345bcf70df236
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - prefabArcosAbiertos1A1: {instanceID: 0}
+  - prefabArcosAbiertos2A1: {instanceID: 0}
+  - prefabArcosAbiertos3A1: {instanceID: 0}
+  - prefabArcosAbiertos4A1: {instanceID: 0}
+  - posicionesArcos1A1: {instanceID: 0}
+  - posicionesArcos2A1: {instanceID: 0}
+  - posicionesArcos3A1: {instanceID: 0}
+  - posicionesArcos4A1: {instanceID: 0}
+  - prefabArcosAbiertos1A2: {instanceID: 0}
+  - prefabArcosAbiertos2A2: {instanceID: 0}
+  - prefabArcosAbiertos3A2: {instanceID: 0}
+  - prefabArcosAbiertos4A2: {instanceID: 0}
+  - posicionesArcos1A2: {instanceID: 0}
+  - posicionesArcos2A2: {instanceID: 0}
+  - posicionesArcos3A2: {instanceID: 0}
+  - posicionesArcos4A2: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

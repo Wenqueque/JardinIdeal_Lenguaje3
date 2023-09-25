@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
        // Buscar objetos con la etiqueta "bien" en la escena
         GameObject[] objetosBien = GameObject.FindGameObjectsWithTag("bien");
 
-        if (objetosBien.Length >= 6 && !arcosYaInstanciados1)
+        if (objetosBien.Length >= 5 && !arcosYaInstanciados1)
         {
             // Desactivar objetos con el tag "arcosCerrados"
             GameObject[] arcosCerrados = GameObject.FindGameObjectsWithTag("arcosCerrados");
@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
             //ganar = true;
         }
 
-        else if (objetosBien.Length < 6 && GameObject.FindGameObjectWithTag("SobreRegado") && GameObject.FindGameObjectWithTag("Marchito") && GameObject.FindGameObjectWithTag("fuenteVacia"))
+        else if (objetosBien.Length < 4 && GameObject.FindGameObjectWithTag("SobreRegado") && GameObject.FindGameObjectWithTag("Marchito") && GameObject.FindGameObjectWithTag("fuenteVacia"))
         {
             //ganar = false;
             //Debug.Log("reinicio");scriptCambioEstados.interaccionesConFuente >= scriptCambioEstados.limiteInteraccionesFuente && GameObject.FindGameObjectWithTag("Marchito") != null && cambioEstados.vecesRegadas >= 1
