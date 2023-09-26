@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.42
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.38804772, g: 0.46658236, b: 0.47520256, a: 0.42}
+  m_IndirectSpecularColor: {r: 0.09573601, g: 0.09418203, b: 0.09592698, a: 0.42}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -22161,7 +22161,7 @@ MonoBehaviour:
   estadoInicial: 1
   estadoActual: 1
   tiempoEnEstadoBien: 0
-  tiempoParaCambioBien: 50
+  tiempoParaCambioBien: 100
 --- !u!65 &508470310
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37755,7 +37755,7 @@ MonoBehaviour:
   estadoInicial: 1
   estadoActual: 1
   tiempoEnEstadoBien: 0
-  tiempoParaCambioBien: 55
+  tiempoParaCambioBien: 100
 --- !u!65 &791776581
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -53479,7 +53479,7 @@ MonoBehaviour:
   estadoInicial: 1
   estadoActual: 1
   tiempoEnEstadoBien: 0
-  tiempoParaCambioBien: 50
+  tiempoParaCambioBien: 100
 --- !u!1001 &1116264062
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64159,7 +64159,7 @@ MonoBehaviour:
   estadoInicial: 1
   estadoActual: 1
   tiempoEnEstadoBien: 0
-  tiempoParaCambioBien: 50
+  tiempoParaCambioBien: 100
 --- !u!65 &1303126359
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -77939,8 +77939,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_Intensity: 14.47
+  m_Color: {r: 0.28574818, g: 0.4056604, b: 0.38778612, a: 1}
+  m_Intensity: 11.35
   m_Range: 10
   m_SpotAngle: 45
   m_InnerSpotAngle: 21.80208

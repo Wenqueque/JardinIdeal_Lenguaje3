@@ -17,7 +17,7 @@ public class cambioEstados : MonoBehaviour
 
     // Cooldown
     private bool puedeInteractuarFuente = true;
-    public float tiempoEsperaInteraccion = 1.0f; // Tiempo de espera en segundos
+    public float tiempoEsperaInteraccion = 10f; // Tiempo de espera en segundos
 
     // Limitaciones
     public int interaccionesConFuente = 0;
