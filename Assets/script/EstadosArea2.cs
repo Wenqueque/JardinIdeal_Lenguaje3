@@ -16,7 +16,7 @@ public class EstadosArea2 : MonoBehaviour
     private bool puedeInteractuarFuente = true;
     public float tiempoEsperaInteraccion = 1.0f; // Tiempo de espera en segundos
     //Limitaciones
-    public int interaccionesConFuente = 0;
+    public int interaccionesConFuente = 1;
     public int limiteInteraccionesFuente = 6; //Esto cambia segun con cuantas plantas interactuamos
     //fuente-------
 

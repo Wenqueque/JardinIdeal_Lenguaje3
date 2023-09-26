@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour
     {
        // Buscar objetos con la etiqueta "bien" en la escena
         GameObject[] objetosBien = GameObject.FindGameObjectsWithTag("bien"); 
-        if (objetosBien.Length >= 14 && !arcosYaInstanciados2)
+        if (objetosBien.Length >= 13 && !arcosYaInstanciados2)
         {
             // Desactivar objetos con el tag "arcosCerrados"
             GameObject[] arcosCerrados = GameObject.FindGameObjectsWithTag("arcosCerrados");
