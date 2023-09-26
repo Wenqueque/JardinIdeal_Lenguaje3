@@ -12,7 +12,7 @@ public class EstadosBalanzas : MonoBehaviour
 
         // Verifica si hay 6 o más objetos con los tags "Marchito" y "Bien" en total
         //if (objetosMarchitos.Length >= 5 || objetosBien.Length >= 5)
-        if (objetosMarchitos.Length <= 6)
+        if (objetosMarchitos.Length <= 5)
         {
             // Activa el objeto1 y desactiva el objeto2
             objeto1.SetActive(true);

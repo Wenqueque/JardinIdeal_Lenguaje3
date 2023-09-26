@@ -6,18 +6,23 @@ public class cambioEstados : MonoBehaviour
 {
     //fuente--------
     public List<GameObject> estadosFuente; // Lista de estados del objeto fuente
-    private int estadoActualIndexFuente = 0; //  ndice del estado actual
+    private int estadoActualIndexFuente = 0; // Índice del estado actual
     private bool cambioFinalizadoFuente = false; // Indicador de que se ha llegado al quinto estado
+
     // Mira al objetivo
     private bool isGazedAtFuente = false;
+
     // Sonido
     public AudioSource SonidoFuente;
-    //Cooldown
+
+    // Cooldown
     private bool puedeInteractuarFuente = true;
     public float tiempoEsperaInteraccion = 1.0f; // Tiempo de espera en segundos
-    //Limitaciones
+
+    // Limitaciones
     public int interaccionesConFuente = 0;
-    public int limiteInteraccionesFuente = 6; //Esto cambia segun con cuantas plantas interactuamos
+    public int limiteInteraccionesFuente = 4; // Esto cambia según con cuántas plantas interactuamos
+
     //fuente-------
 
     public GameObject prefabAbonar;
@@ -30,13 +35,13 @@ public class cambioEstados : MonoBehaviour
 
     private GameObject plantaActual; // Referencia al prefab activo actualmente
 
-    //MIRA AL OBJETIVO
+    // MIRA AL OBJETIVO
     private bool _isGazedAt = false;
 
-    //CONTADOR DE REGAR ENTRE TODOS LOS OBJETOS
+    // CONTADOR DE REGAR ENTRE TODOS LOS OBJETOS
     private static int vecesRegadas = 1;
 
-    //ESTADOS DE PLANTA
+    // ESTADOS DE PLANTA
     public enum EstadoPlanta
     {
         Abonar,
@@ -46,7 +51,7 @@ public class cambioEstados : MonoBehaviour
         nada
     }
 
-    //TIEMPO
+    // TIEMPO
     public float tiempoEnEstadoBien = 0f; // Tiempo en el estado "Bien"
     public float tiempoParaCambioBien = 50f; // Tiempo para cambiar del estado "Bien" a "NecesitaRegar"
 
@@ -59,7 +64,7 @@ public class cambioEstados : MonoBehaviour
         //fuente-------
     }
 
-    private IEnumerator PermitirInteraccionDespuesDeEspera()
+    private IEnumerator PermitirInteraccionDespuésDeEspera()
     {
         yield return new WaitForSeconds(tiempoEsperaInteraccion);
         puedeInteractuarFuente = true;
@@ -88,16 +93,16 @@ public class cambioEstados : MonoBehaviour
             CambiarEstado(EstadoPlanta.NecesitaRegar); // Cambia a "NecesitaRegar"
         }
 
-        //Verifica si se llegó al límite de interacciones con la fuente y vecesRegadas es igual a 1
+        // Verifica si se llegó al límite de interacciones con la fuente y vecesRegadas es igual a 1
         if (interaccionesConFuente >= limiteInteraccionesFuente && vecesRegadas == 1)
-            {
-                // Reinicia los parámetros apropiados aquí
-                //interaccionesConFuente = 0;
-                cambioFinalizadoFuente = false;
-                estadoActual = estadoInicial;
+        {
+            // Reinicia los parámetros apropiados aquí
+            //interaccionesConFuente = 0;
+            cambioFinalizadoFuente = false;
+            estadoActual = estadoInicial;
 
-                AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
-                // También puedes reiniciar otros parámetros si es necesario
+            AudioManagerSingleton.Instance.PlaySound(1); // 0 es el índice del sonido que deseas reproducir
+            // También puedes reiniciar otros parámetros si es necesario
         }
 
         //if (_isGazedAt && Input.GetAxis("Cortar") > 0 && estadoActual == EstadoPlanta.Abonar)
@@ -144,12 +149,12 @@ public class cambioEstados : MonoBehaviour
 
                             // Después de la interacción, espera un tiempo antes de permitir otra interacción
                             puedeInteractuarFuente = false;
-                            StartCoroutine(PermitirInteraccionDespuesDeEspera());
+                            StartCoroutine(PermitirInteraccionDespuésDeEspera());
 
                             CambiarEstadoFuente((estadoActualIndexFuente + 1) % estadosFuente.Count);
 
                             // Verifica si hemos llegado al quinto estado y marcamos el cambio como finalizado
-                            if (estadoActualIndexFuente == 6) // Cambiado de 5 a 4, ya que los índices comienzan desde 0
+                            if (estadoActualIndexFuente == 4) // Cambiado de 5 a 4, ya que los índices comienzan desde 0
                             {
                                 cambioFinalizadoFuente = true;
                             }
@@ -198,8 +203,6 @@ public class cambioEstados : MonoBehaviour
         isGazedAtFuente = false;
     }
 
-    
-
     private void CambiarEstadoFuente(int nuevoEstadoIndexFuente)
     {
         // Desactiva el estado actual
@@ -208,7 +211,7 @@ public class cambioEstados : MonoBehaviour
         // Activa el nuevo estado
         estadosFuente[nuevoEstadoIndexFuente].SetActive(true);
 
-        // Actualiza el  ndice del estado actual
+        // Actualiza el índice del estado actual
         estadoActualIndexFuente = nuevoEstadoIndexFuente;
     }
 
@@ -255,6 +258,6 @@ public class cambioEstados : MonoBehaviour
         if (vecesRegadas >= 1)
         {
             _isGazedAt = false;
-        }
-    }
+        }
+    }
 }
