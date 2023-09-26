@@ -62,8 +62,8 @@ public class GameManager : MonoBehaviour
             pasarNivel3();
         }
         // Verifica si la tecla "D" ha sido presionada y reinicia la escena seleccionada        
-        //if (Input.GetAxis("Reiniciar") > 0) //JOYSTICK--------------------------------
-        if (Input.GetKey(KeyCode.R))  //TECLADO
+        if (Input.GetAxis("Reiniciar") > 0) //JOYSTICK--------------------------------
+        //if (Input.GetKey(KeyCode.R))  //TECLADO
         {
             ResetSelectedScene();
         }

@@ -21,11 +21,10 @@ public class cambioEstados : MonoBehaviour
 
     // Limitaciones
     public int interaccionesConFuente = 0;
-    public int limiteInteraccionesFuente = 4; // Esto cambia según con cuántas plantas interactuamos
+    public int limiteInteraccionesFuente = 6; // Esto cambia según con cuántas plantas interactuamos
 
     //fuente-------
 
-    public GameObject prefabAbonar;
     public GameObject prefabBien;
     public GameObject prefabNecesitaRegar;
     public GameObject prefabSobreRegar;
@@ -44,7 +43,6 @@ public class cambioEstados : MonoBehaviour
     // ESTADOS DE PLANTA
     public enum EstadoPlanta
     {
-        Abonar,
         Bien,
         NecesitaRegar,
         SobreRegar,
@@ -105,16 +103,7 @@ public class cambioEstados : MonoBehaviour
             // También puedes reiniciar otros parámetros si es necesario
         }
 
-        //if (_isGazedAt && Input.GetAxis("Cortar") > 0 && estadoActual == EstadoPlanta.Abonar)
-        if (_isGazedAt && Input.GetKeyDown(KeyCode.E) && estadoActual == EstadoPlanta.Abonar)
-        {
-            // Realiza acciones para el estado de Abonar
-            Debug.Log("Abonando la planta");
-            CambiarEstado(EstadoPlanta.Bien);
-            AudioManagerSingleton.Instance.PlaySound(3); // 0 es el índice del sonido que deseas reproducir
-        }
-        //else if (_isGazedAt && Input.GetAxis("Cortar") > 0 && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //JOYSTICK
-        else if (_isGazedAt && Input.GetKeyDown(KeyCode.E) && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //TECLADO
+        if (_isGazedAt && Input.GetKeyDown(KeyCode.E) && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1)
         {
             // Realiza acciones para el estado de NecesitaRegar
             Debug.Log("Regando la planta");
@@ -122,8 +111,7 @@ public class cambioEstados : MonoBehaviour
             vecesRegadas++; // Incrementa el contador de riegos
             AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
         }
-        //else if (_isGazedAt && Input.GetAxis("Cortar") > 0 && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //JOYSTICK
-        else if (_isGazedAt && Input.GetKeyDown(KeyCode.E) && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //TECLADO
+        else if (_isGazedAt && Input.GetKeyDown(KeyCode.E) && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1)
         {
             // Realiza acciones para el estado de NecesitaRegar
             Debug.Log("SobreRegando la planta");
@@ -132,7 +120,6 @@ public class cambioEstados : MonoBehaviour
             AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
         }
 
-        //if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetAxis("Cortar") > 0)
         if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetKeyDown(KeyCode.E))
         {
             if (puedeInteractuarFuente)
@@ -154,7 +141,7 @@ public class cambioEstados : MonoBehaviour
                             CambiarEstadoFuente((estadoActualIndexFuente + 1) % estadosFuente.Count);
 
                             // Verifica si hemos llegado al quinto estado y marcamos el cambio como finalizado
-                            if (estadoActualIndexFuente == 4) // Cambiado de 5 a 4, ya que los índices comienzan desde 0
+                            if (estadoActualIndexFuente == 6) // Cambiado de 5 a 4, ya que los índices comienzan desde 0
                             {
                                 cambioFinalizadoFuente = true;
                             }
@@ -186,7 +173,6 @@ public class cambioEstados : MonoBehaviour
                 }
             }
         }
-
     }
 
     // Este método se llama cuando el objeto está siendo mirado.
@@ -227,9 +213,6 @@ public class cambioEstados : MonoBehaviour
 
         switch (estadoActual)
         {
-            case EstadoPlanta.Abonar:
-                plantaActual = prefabAbonar;
-                break;
             case EstadoPlanta.Bien:
                 plantaActual = prefabBien;
                 break;

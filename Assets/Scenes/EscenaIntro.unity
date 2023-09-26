@@ -577,7 +577,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 2.185, y: 1, z: 1.1625}
+  m_LocalScale: {x: 2.2031965, y: 1.0083278, z: 1.1721812}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 795458098}
@@ -624,7 +624,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0f2af549879a2cf49a1d90b8e2cd65e0, type: 2}
+  - {fileID: 2100000, guid: f720964fe0021d745bc559acb3f16947, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -734,8 +734,8 @@ Camera:
   m_GameObject: {fileID: 795458094}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.654902, g: 0.6392157, b: 0.42352945, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
