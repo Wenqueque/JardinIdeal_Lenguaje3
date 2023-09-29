@@ -101,16 +101,16 @@ public class EstadosArea2 : MonoBehaviour
             estadoActual = estadoInicial;
             AudioManagerSingleton.Instance.PlaySound(1); // 0 es el �ndice del sonido que deseas reproducir
         }
-        if (_isGazedAt && Input.GetAxis("Cortar") > 0 && estadoActual == EstadoPlanta.Abonar) //JOYSTICK
-        //if (_isGazedAt && Input.GetKeyDown(KeyCode.E) && estadoActual == EstadoPlanta.Abonar) //TECLADO
+        //if (_isGazedAt && Input.GetAxis("Cortar") > 0 && estadoActual == EstadoPlanta.Abonar) //JOYSTICK
+        if (_isGazedAt && Input.GetKeyDown(KeyCode.E) && estadoActual == EstadoPlanta.Abonar) //TECLADO
         {
             // Realiza acciones para el estado de Abonar
             Debug.Log("Abonando la planta");
             CambiarEstado(EstadoPlanta.Bien);
             AudioManagerSingleton.Instance.PlaySound(3); // 0 es el �ndice del sonido que deseas reproducir
         }
-        else if (_isGazedAt && Input.GetAxis("Cortar") > 0 && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //JOYSTICK
-        //else if (_isGazedAt && Input.GetKeyDown(KeyCode.E) && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //TECLADO
+        //else if (_isGazedAt && Input.GetAxis("Cortar") > 0 && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //JOYSTICK
+        else if (_isGazedAt && Input.GetKeyDown(KeyCode.E) && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1) //TECLADO
         {
             // Realiza acciones para el estado de NecesitaRegar
             Debug.Log("Regando la planta");
@@ -118,8 +118,8 @@ public class EstadosArea2 : MonoBehaviour
             vecesRegadas++; // Incrementa el contador de riegos
             AudioManagerSingleton.Instance.PlaySound(2); // 0 es el �ndice del sonido que deseas reproducir
         }
-        else if (_isGazedAt && Input.GetAxis("Cortar") > 0 && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //JOYSTICK
-        //else if (_isGazedAt && Input.GetKeyDown(KeyCode.E) && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //TECLADO
+        //else if (_isGazedAt && Input.GetAxis("Cortar") > 0 && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //JOYSTICK
+        else if (_isGazedAt && Input.GetKeyDown(KeyCode.E) && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1) //TECLADO
         {
             // Realiza acciones para el estado de NecesitaRegar
             Debug.Log("SobreRegando la planta");
@@ -148,8 +148,8 @@ public class EstadosArea2 : MonoBehaviour
 
         //if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetAxis("Regar") > 0)
         // Si el jugador presiona la tecla "R" y est� colisionando con un objeto que tiene el tag "Fuente"
-        if (Input.GetAxis("Cortar") > 0 && estaMirandoFuente)
-        //if (Input.GetKeyDown(KeyCode.E) && estaMirandoFuente)
+        //if (Input.GetAxis("Cortar") > 0 && estaMirandoFuente)
+        if (Input.GetKeyDown(KeyCode.E) && estaMirandoFuente)
         {
             if (puedeInteractuarFuente)
             {

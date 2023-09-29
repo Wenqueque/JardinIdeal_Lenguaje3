@@ -103,8 +103,8 @@ public class cambioEstados : MonoBehaviour
             // También puedes reiniciar otros parámetros si es necesario
         }
 
-        if (_isGazedAt && Input.GetAxis("Cortar") > 0 && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1)
-        //if (_isGazedAt && Input.GetKeyDown(KeyCode.E) && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1)
+        //if (_isGazedAt && Input.GetAxis("Cortar") > 0 && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1)
+        if (_isGazedAt && Input.GetKeyDown(KeyCode.E) && estadoActual == EstadoPlanta.NecesitaRegar && vecesRegadas < 1)
         {
             // Realiza acciones para el estado de NecesitaRegar
             Debug.Log("Regando la planta");
@@ -112,8 +112,8 @@ public class cambioEstados : MonoBehaviour
             vecesRegadas++; // Incrementa el contador de riegos
             AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
         }
-        else if (_isGazedAt && Input.GetAxis("Cortar") > 0 && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1)
-        //else if (_isGazedAt && Input.GetKeyDown(KeyCode.E) && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1)
+        //else if (_isGazedAt && Input.GetAxis("Cortar") > 0 && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1)
+        else if (_isGazedAt && Input.GetKeyDown(KeyCode.E) && estadoActual == EstadoPlanta.Bien && vecesRegadas < 1)
         {
             // Realiza acciones para el estado de NecesitaRegar
             Debug.Log("SobreRegando la planta");
@@ -122,8 +122,8 @@ public class cambioEstados : MonoBehaviour
             AudioManagerSingleton.Instance.PlaySound(2); // 0 es el índice del sonido que deseas reproducir
         }
 
-        if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetAxis("Cortar") > 0)
-        //if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetKeyDown(KeyCode.E))
+        //if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetAxis("Cortar") > 0)
+        if (isGazedAtFuente && !cambioFinalizadoFuente && Input.GetKeyDown(KeyCode.E))
         {
             if (puedeInteractuarFuente)
             {
